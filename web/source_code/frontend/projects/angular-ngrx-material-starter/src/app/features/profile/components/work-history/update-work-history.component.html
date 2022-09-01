@@ -1,0 +1,145 @@
+<div mat-dialog-content class="modal-dialog-no-scroll">
+
+    <form [formGroup]="form">
+      <div class="row w-100">
+        <div class="col align-right pointer">
+          <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+        </div>
+      </div>
+
+        <h1 mat-dialog-title>Update Information</h1>
+
+        <div [ngSwitch]="data.fieldName">
+            <!-- State Controls -->
+            <div *ngSwitchCase="'physicalState'">
+                <mat-form-field class="modal-control">
+                    <input matInput placeholder="{{ data.fieldValue }}" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let state of filteredStates | async" [value]="state.abbreviation">
+                            <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
+                            <span>{{ state.name }}</span>
+                    
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            
+                <div mat-dialog-actions>
+                    <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+                    <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+                </div>
+        
+            </div>
+
+            <div *ngSwitchCase="'mailingState'">
+                <mat-form-field class="modal-control" appearance="fill">
+                    <input matInput placeholder="{{ data.fieldValue }}" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let state of filteredStates | async" [value]="state.abbreviation">
+                            <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
+                            <span>{{ state.name }}</span>
+                        
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <div mat-dialog-actions>
+                    <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+                    <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+                </div>
+        
+            </div>
+
+            <!-- Date Controls -->
+
+            <div *ngSwitchCase="'startDate'">
+                <mat-form-field class="modal-control" appearance="fill">
+                    <mat-label>{{ 'custom.user.profile.insert-work-history.start-date-label' | translate }}</mat-label>
+                    <input matInput [matDatepicker]="startDatePicker" placeholder="{{ data.fieldValue }}" formControlName="dateCtrl">
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startDatePicker></mat-datepicker>
+                
+                </mat-form-field>
+
+                <div mat-dialog-actions>
+                    <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+                    <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+                </div>
+        
+            </div>
+
+            <div *ngSwitchCase="'endDate'">
+                <mat-form-field class="modal-control" appearance="fill">
+                    <mat-label>{{ 'custom.user.profile.insert-work-history.end-date-label' | translate }}</mat-label>
+                    <input matInput [matDatepicker]="endDatePicker" placeholder="{{ data.fieldValue }}" formControlName="dateCtrl">
+                    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker></mat-datepicker>
+                
+                </mat-form-field>
+
+                <div mat-dialog-actions>
+                    <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+                    <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+                </div>
+        
+            </div>
+            
+            <div *ngSwitchCase="'description'">
+                <mat-form-field class="modal-control" appearance="fill">
+                    <textarea matInput formControlName="newValue" placeholder="{{ data.fieldValue }}" class="text-paragraph">
+                    </textarea>
+                </mat-form-field>
+
+                <div mat-dialog-actions>
+                    <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+                    <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+                </div>
+        
+            </div>
+
+            <div *ngSwitchCase="'phoneNumber'">
+                <mat-form-field class="modal-control" appearance="fill">
+                    <input matInput [formControl]="phoneCtrl" placeholder="{{ data.fieldValue }}">
+                    <mat-error>
+                        {{ 'custom.user.profile.insert-work-history.phone-number-error' | translate }}
+                    </mat-error>
+                </mat-form-field>
+
+                <div mat-dialog-actions>
+                    <button mat-raised-button color="primary" class="btn-normal" [disabled]="phoneCtrl.invalid" (click)="onUpdate()">Update</button>
+                    <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+                </div>
+        
+            </div>
+
+            <div *ngSwitchCase="'email'">
+                <mat-form-field class="modal-control" appearance="fill">
+                    <input matInput [formControl]="emailCtrl" placeholder="{{ data.fieldValue }}">
+                    <mat-error>
+                        {{ 'custom.user.profile.insert-work-history.email-error' | translate }}
+                    </mat-error>
+                </mat-form-field>
+
+                <div mat-dialog-actions>
+                    <button mat-raised-button color="primary" class="btn-normal" [disabled]="emailCtrl.invalid" (click)="onUpdate()">Update</button>
+                    <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+                </div>
+        
+            </div>
+
+            <!-- Default Controls-->
+            <div *ngSwitchDefault> 
+
+                <mat-form-field appearance="fill" class="modal-control">
+                    <input matInput formControlName="newValue" placeholder="{{ data.fieldValue }}">
+                </mat-form-field>
+
+                <div mat-dialog-actions>
+                    <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+                    <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+                </div>
+        
+            </div>
+        </div>
+    </form>
+    
+</div>

@@ -1,0 +1,11 @@
+@use '~@angular/material' as mat;
+
+$bizniz-nature-primary: mat.define-palette(mat.$brown-palette, 700, 300, 900);
+$bizniz-nature-accent: mat.define-palette(mat.$deep-purple-palette, 300);
+$bizniz-nature-warn: mat.define-palette(mat.$red-palette, 600);
+
+$bizniz-nature-theme: mat.define-light-theme(
+  $bizniz-nature-primary,
+  $bizniz-nature-accent,
+  $bizniz-nature-warn
+);

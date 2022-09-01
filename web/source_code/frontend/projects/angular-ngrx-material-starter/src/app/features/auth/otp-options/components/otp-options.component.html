@@ -1,0 +1,58 @@
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <mat-card>
+      
+      <mat-card-title>{{ 'custom.auth.otp-options.title' | translate }}</mat-card-title>
+        <div class="row">
+          <div class="col">
+            
+            <!--<ng-container *ngIf="otpOptions$ | async as otpOptions">-->
+              <div *ngFor="let item of otpOptions$ | async">
+                
+                <div class="mdc-touch-target-wrapper">
+                  <div class="mdc-radio mdc-radio--touch">
+                    <!--<input class="mdc-radio__native-control" type="radio" id="{{ 'radioOptionsMdc-' + i }}" value={{item.id}} checked formControlName="selectedAddress">-->
+                    <input class="mdc-radio__native-control" type="radio" value={{item.id}} checked formControlName="selectedAddress">
+                    
+                    <div class="mdc-radio__background">
+                      <div class="mdc-radio__outer-circle"></div>
+                      <div class="mdc-radio__inner-circle"></div>
+                    </div>
+                    <div class="mdc-radio__ripple"></div>
+                  </div>
+                </div>
+                
+                <!--<label class="form-check-label" for="{{ 'radioOptions-' + i }}">-->
+                <span *ngIf='item.status==="unverified"; else greenText'>
+                  <label class="form-check-label">
+                    {{ item.display }} <span class="text-danger">({{ item.status }})</span>
+                  </label>
+                </span>
+                <ng-template #greenText>
+                  <label class="form-check-label">
+                    {{ item.display }} <span class="text-success">({{ item.status }})</span>
+                  </label>
+                </ng-template>
+              
+              </div>
+            <!--</ng-container>-->
+          </div>
+        </div>
+        
+      <div class="row justify-content-end">
+        <div class="col">
+          <button mat-raised-button color="primary" class="btn-normal" [disabled]="form.invalid">
+            {{ 'custom.auth.otp-options.sendCode-label' | translate }}
+          </button>
+        </div>
+      </div>
+      
+      <!--
+      <button class="btn btn-primary btn-block" type="button" (click)="onSendCode()">Send Code</button>
+
+      -->
+    
+    </mat-card>
+  </div>
+</form>

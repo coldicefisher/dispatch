@@ -1,0 +1,37 @@
+    <form [formGroup]="form" (ngSubmit)="onCheck()">
+      <mat-card>
+        <mat-card-title>{{ 'custom.auth.check-device.title' | translate }}</mat-card-title>
+          
+        <div class="row">
+          <mat-form-field class="col">
+            <input matInput placeholder="{{ 'custom.auth.check-device.username-label' | translate }}"
+              formControlName="username" type="username" id="username"
+              cdkFocusInitial>
+            <mat-error *ngIf="form.get('username')?.hasError('required')">
+              
+              {{ 'custom.auth.check-device.error1' | translate }}
+            </mat-error>
+            
+          </mat-form-field>
+        </div>
+
+        <div class="row justify-content-end">
+          <div class="col">
+            <button mat-raised-button color="primary" class="btn-normal" [disabled]="form.invalid">
+              {{ 'custom.submit' | translate }}
+            </button>
+            <button mat-stroked-button class="btn-normal" type="button" (click)="onSignUp()">
+              {{ 'custom.register' | translate }}
+            </button>
+            <button mat-stroked-button class="btn-wide" type="button" (click)="onRetrieveUsername()">
+              {{ 'custom.forgot-username' | translate }}
+            </button>
+            <button mat-stroked-button class="btn-wide" type="button" (click)="onResetPassword()">
+              {{ 'custom.forgot-password' | translate }}
+            </button>
+          </div>          
+        </div>
+    
+      </mat-card>
+    </form>
+  

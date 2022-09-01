@@ -1,0 +1,17 @@
+
+<div class="container" class="main-form-container mx-auto" [ngSwitch]="(loginStatus$ | async)">
+      <div *ngSwitchCase="'sign_up'">
+        <bizniz-sign-up></bizniz-sign-up>
+      </div>
+      <div *ngSwitchDefault>
+        <bizniz-sign-up></bizniz-sign-up>
+      </div>
+      <!--
+      <bizniz-reset-username *ngIf="bizniz-reset-username"></bizniz-reset-username>
+      <bizniz-reset-password *ngIf="bizniz-reset-password"></bizniz-reset-password>-->
+      <!--
+    </div>
+  -->
+</div>
+
+  

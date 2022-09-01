@@ -1,0 +1,134 @@
+<div class="container main-form-container mx-auto">
+  <mat-card>
+    <div class="">
+      <mat-card-title>
+        <!--<h3>{{ 'custom.user.profile.security.title' | translate }}</h3>-->
+      </mat-card-title>
+    </div>    
+    
+    <mat-card-content>
+      <div class="">
+        <form [formGroup]="form" class="" (ngSubmit)="onTheSameClick()">
+          <div class="row w-100">
+            <div class="col align-right pointer">
+              <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+            </div>
+          </div>
+   
+          <div class="row">
+            <div class="col">
+              <GoogleAutoAddress (setAddress)="getAddress($event)" addressType="geocode" cdkFocusInitial></GoogleAutoAddress>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="modal-control">
+                <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.insert-work-history.physical-address1-label' | translate }}"
+                  formControlName="physicalAddress1Ctrl">
+                <mat-error *ngIf="form.get('physicalAddress1Ctrl')?.hasError('required')">
+                  {{ 'custom.user.profile.insert-work-history.physical-address1-error' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="modal-control">
+                <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.insert-work-history.physical-address2-label' | translate }}"
+                  formControlName="physicalAddress2Ctrl">
+                
+              </mat-form-field>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="modal-control">
+                <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.insert-work-history.physical-city-label' | translate }}"
+                  formControlName="physicalCityCtrl">
+                <mat-error *ngIf="form.get('physicalCityCtrl')?.hasError('required')">
+                  {{ 'custom.user.profile.insert-work-history.physical-city-error' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-form-field appearance="fill" class="modal-control">  
+                <input matInput placeholder="Physical State" aria-label="State" [matAutocomplete]="autoPhyState" [formControl]="physicalStateCtrl">
+                <mat-error *ngIf="physicalStateCtrl?.hasError('required')">
+                  {{ 'custom.user.profile.insert-work-history.physical-state-error' | translate }}
+                </mat-error>
+              
+                <mat-autocomplete #autoPhyState="matAutocomplete">
+                  <mat-option *ngFor="let state of filteredPhysicalStates | async" [value]="state.abbreviation">
+                      <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
+                      <span>{{ state.name }}</span>
+                    
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+          
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="modal-control">
+                <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.insert-work-history.physical-zip-label' | translate }}"
+                  formControlName="physicalZipCtrl">
+                <mat-error *ngIf="form.get('physicalZipCtrl')?.hasError('required')">
+                  {{ 'custom.user.profile.insert-work-history.physical-zip-error' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <div class="row" >
+            <div class="col">
+              <h2>My Mailing address is</h2>
+            </div>
+          </div>
+
+          <div class="row"  >
+            <div class="col col-12 col-md-4">
+              <button mat-raised-button color="primary" class="btn-main"
+                      type="submit"
+                      [disabled]="form.invalid || physicalStateCtrl.invalid">
+                The Same
+              </button>
+            </div>
+
+            <div class="col col-12 col-md-4" >
+              <button mat-raised-button color="primary" class="btn-main"
+                      type="button"  (click)="onDifferentClick()"
+                      [disabled]="form.invalid || physicalStateCtrl.invalid">
+                Different
+              </button>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col">
+              <button mat-stroked-button class="btn-normal" type="button" (click)="onPreviousClick()">
+                Previous
+              </button>
+              
+              <button mat-button class="btn-normal" type="button" (click)="onNoClick()">
+                Cancel
+              </button>
+            </div>
+          </div>
+        
+        </form>
+      </div>
+    
+    </mat-card-content>
+  </mat-card>
+</div>
+    

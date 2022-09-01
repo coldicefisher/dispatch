@@ -1,0 +1,32 @@
+<div class="form-article-container mx-auto">
+  <mat-card>
+    <div class="row" [ngSwitch]="(pageStatus$ | async)">
+      
+      <div *ngSwitchCase="1">
+        <CreateApplication1></CreateApplication1>
+      </div>
+    
+      <div *ngSwitchCase="2">
+        <CreateApplication2></CreateApplication2>
+      </div>
+      <div *ngSwitchCase="3">
+        <CreateApplication3></CreateApplication3>
+      </div>
+      
+      <div *ngSwitchCase="4">
+        <CreateApplication4></CreateApplication4>
+      </div>
+      <div *ngSwitchCase="5">
+        <CreateApplication5></CreateApplication5>
+      </div>
+      <div *ngSwitchCase="6">
+        <CreateApplication6></CreateApplication6>
+      </div>
+      
+      <div *ngSwitchDefault> 
+        <CreateApplication1></CreateApplication1>
+      </div>
+    </div>
+  </mat-card>    
+</div>
+    

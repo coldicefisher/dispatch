@@ -1,0 +1,97 @@
+<div class="container main-form-container mx-auto">
+  <mat-card>
+    <div class="" >
+      <mat-card-title >
+        
+      </mat-card-title>
+    </div>    
+    
+    <mat-card-content >
+      
+      <form [formGroup]="form">        
+        <div class=""  *ngIf="createFormState$ | async; let createForm">
+          <div class="row w-100">
+            <div class="col align-right pointer">
+              <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+            </div>
+          </div>
+
+          <div class="row" >
+            <div class="col">
+              <CheckBusinessName 
+              (setBusinessName)="getBusinessName($event)" 
+              ></CheckBusinessName>
+            </div>
+          </div>
+
+          <div class="row" >
+            <div class="col">
+              <mat-form-field appearance="fill" class="modal-control" >  
+                <input matInput placeholder="Legal Structure" aria-label="Legal Structure" 
+                        [matAutocomplete]="autoLegalStructure" [formControl]="legalStructureCtrl" 
+                        (focusout)="checkStructure()">
+                <mat-error *ngIf="legalStructureCtrl?.hasError('required')">
+                  {{ 'custom.user.profile.create-business.legal-structure-error' | translate }}
+                </mat-error>
+                <mat-autocomplete #autoLegalStructure="matAutocomplete" (optionSelected)="structureClick($event)">
+                  <mat-option *ngFor="let structure of filteredLegalStructures | async" [value]="structure.value">
+                      <span>{{ structure.display }}</span>
+                    
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- MC Number DOT Number -->
+          
+          <!-- BUTTONS -->
+          <div class="row" >
+            <div class="col">
+              <h2>I am a</h2>
+            </div>
+          </div>
+
+          <div class="row"  >
+            <div class="col col-12 col-md-4">
+              <button mat-raised-button color="primary" class="btn-main"
+                      type="button" (click)="onCarrierClick()"
+                      [disabled]="form.invalid || legalStructureCtrl.invalid || (nameExists) || (nameEmptyError)">
+                Carrier
+              </button>
+            </div>
+
+            <div class="col col-12 col-md-4" >
+              <button mat-raised-button color="primary" class="btn-main"
+                      type="button"  (click)="onBrokerClick()"
+                      [disabled]="form.invalid || legalStructureCtrl.invalid || (nameExists)">
+                Broker
+              </button>
+            </div>
+
+            <div class="col col-12 col-md-4">
+              <button mat-stroked-button color="primary" class="btn-main"
+                      type="button"  (click)="onOtherClick()"
+                      [disabled]="form.invalid || legalStructureCtrl.invalid || (nameExists)">
+                Neither
+              </button>
+            </div>
+
+          </div>
+
+          <div class="row" >
+            <div class="col">
+              
+              <button mat-button class="btn-normal" type="button" 
+                    (click)="onNoClick()" >
+                Cancel
+              </button>
+            </div>
+          </div>
+    
+        </div>
+      </form>
+    
+    </mat-card-content>
+  </mat-card>
+</div>
+    

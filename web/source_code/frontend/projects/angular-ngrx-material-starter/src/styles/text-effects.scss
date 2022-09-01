@@ -1,0 +1,100 @@
+.text-danger {
+    color: rgba(211, 47, 47);
+}
+.text-success {
+    color: green;
+}
+.p-div {
+    float:left;
+    width: fit-content;
+}
+.pointer {
+    cursor: pointer!important;
+    label {
+        cursor: pointer!important;
+    }
+}
+.pointer:hover {
+    color: rgb(33, 150, 243)!important;
+    
+}
+.pointer-img {
+    cursor: pointer;
+}
+.pointer-img:hover {
+    color: #03a9f4;
+    opacity: .5;
+}
+
+.preserve-format {
+    white-space: pre-wrap;
+}
+
+.textarea-paragraph {
+    height: 250px;
+}
+.primary-text {
+    font-size: 16px;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    font-weight: 400;
+}
+
+.file-input {
+    display: none;
+}
+
+.center-single-col {
+    max-width: 950px;
+    
+}
+
+.link-normal {
+  color: #0000EE !important;
+  cursor: pointer !important;
+  text-decoration: underline !important;
+  border: none;
+}
+.link-normal:hover {
+  color: #03a9f4 !important;
+}
+
+.align-left {
+  text-align: left !important;
+}
+
+.align-right {
+    text-align: right !important;
+}
+
+.align-center {
+    text-align: center !important;
+}
+
+.align-bottom {
+  vertical-align: bottom !important;
+  height: 100%;
+}
+.text-primary {
+    font-size: 16px;
+}
+
+.trim-to-content {
+    display: inline-block;
+}
+
+
+.main-text {
+  font-size: 18px;
+  text-align: start;
+  vertical-align: text-top;
+  vertical-align: top;
+}
+
+.width-100 {
+  width: 100%!important;
+}
+
+.height-100 {
+  height: 100%!important;
+}

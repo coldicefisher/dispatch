@@ -1,0 +1,121 @@
+.dashboard-sidenav {
+  width: 200px;
+  padding-left: 10px;
+  
+}
+
+.dashboard-container {
+  min-height: 600px;
+  height: 100%;
+  
+  
+}
+
+.dashboard-menu ul {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+  
+}
+.dashboard-active {
+  background-color: rgb(33, 150, 243)!important;
+  // color: (0, 0, 0, 0.87) !important;
+  //color: (255, 255, 255)!important;
+  color: white!important;
+}
+
+.dashboard-active:hover {
+  color: black!important;
+}
+
+.dashboard-button {
+  width: 100%!important;
+  text-align: left!important;
+}
+
+
+.user-card {
+  width: 350px;
+}
+
+.user-card span {
+  font-size: 12px;
+}
+.user-picture {
+  text-align: center;
+}
+.user-name {
+  text-align: center;
+}
+
+.user-image-container {
+  min-height: 50px;
+  min-width: 50px;
+  position: relative;
+}
+
+.user-image { 
+  width: 60px;
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+} 
+
+.user-image img { 
+  display: relative;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;    
+}
+
+.user-pending {
+    background-color: yellow;
+
+}
+.user-pending-visible {
+    background-color: yellow;
+    visibility: hidden;
+}
+.full-width {
+	left: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+	max-width: 100vw;
+	position: relative;
+	right: 50%;
+	width: 100vw;
+}
+
+.inline-span {
+  //display: inline-block;
+  text-align: right;
+  
+}
+.inline-span::before {
+  content: " | ";
+}
+.inline-span:first-child:before {
+  content: " ";
+}
+
+.inline-block {
+  display: inline-block;
+  
+}
+.inline-block p h1 h2 h3 h4 h5 h6 div span {
+  display: inline-block;
+}
+.toolbar {
+  height: 50px;
+}
+.toolbar-select {
+  font-size: 14px;
+  vertical-align: bottom!important;
+}
+
+.toolbar-control {
+  //padding-top: 20px;
+  // margin-top: 30px;
+  margin-bottom: 0px!important;
+}

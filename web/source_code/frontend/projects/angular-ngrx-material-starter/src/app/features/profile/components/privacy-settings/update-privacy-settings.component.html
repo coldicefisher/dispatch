@@ -1,0 +1,61 @@
+<div mat-dialog-content class="modal-dialog-no-scroll">
+    
+  <form [formGroup]="form">
+
+      <h1 mat-dialog-title>Update Information</h1>
+
+      <div [ngSwitch]="data.fieldName">
+          
+          <div *ngSwitchCase="'privacyStatus'">
+              <mat-form-field appearance="fill" class="modal-control">
+                  <input matInput placeholder="{{ data.fieldValue }}" aria-label="privacyStatus" [matAutocomplete]="autoPrivacyStatus" [formControl]="privacyStatusCtrl">
+                  <mat-autocomplete #autoPrivacyStatus="matAutocomplete">
+                  <mat-option *ngFor="let type of filteredPrivacyStatus | async" [value]="type.value">
+                      <span>{{ type.display }}</span>
+                      
+                  </mat-option>
+                  </mat-autocomplete>
+              </mat-form-field>
+
+              <div mat-dialog-actions>
+                  <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+                  <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+              </div>
+      
+          </div>
+          
+          <div *ngSwitchCase="'seekingStatus'">
+            <mat-form-field appearance="fill" class="modal-control">
+                <input matInput placeholder="{{ data.fieldValue }}" aria-label="seekingStatus" [matAutocomplete]="autoSeekingStatus" [formControl]="seekingStatusCtrl">
+                <mat-autocomplete #autoSeekingStatus="matAutocomplete">
+                <mat-option *ngFor="let type of filteredSeekingStatus | async" [value]="type.value">
+                    <span>{{ type.display }}</span>
+                    
+                </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <div mat-dialog-actions>
+                <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+                <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+            </div>
+    
+        </div>
+          <!-- Default Controls-->
+          <div *ngSwitchDefault> 
+
+              <mat-form-field appearance="fill" class="modal-control">
+                  <input matInput formControlName="newValue" placeholder="{{ data.fieldValue }}">
+              </mat-form-field>
+
+              <div mat-dialog-actions>
+                  <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+                  <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+              </div>
+      
+          </div>
+
+      </div>
+  </form>
+  
+</div>

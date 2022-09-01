@@ -1,0 +1,107 @@
+from libs.cass_auth.businesses.business_model import BusinessModel, BusinessProfile
+my_profile = BusinessProfile('86af673b-374e-49bd-a205-b75b1f8a4152', True, {'Administrator', 'Driver', 'Human Resources'}, "M&H Express")
+mandh = BusinessModel().get('M&H Express')
+mandh.upsert_profile(my_profile)
+mandh.add_permissions('86af673b-374e-49bd-a205-b75b1f8a4152',{'Administrator', 'Driver', 'human3', 'human4'})
+
+
+from libs.cass_auth.businesses.business_model import BusinessModel, BusinessProfile
+# my_profile = BusinessProfile('86af673b-374e-49bd-a205-b75b1f8a4152', True, {'Administrator', 'Driver', 'Human Resources'})
+mandh = BusinessModel().get('M&H Express')
+profile = mandh.profiles['86af673b-374e-49bd-a205-b75b1f8a4152']
+
+profile.add_permissions({'turkey', 'burger'})
+
+profile.delete_permissions({'burger'})
+
+profile.replace_permissions({'Administrator', 'Owner'})
+
+
+from libs.cass_auth.profiles.profile_model import ProfileModel, fetchType
+jamey = ProfileModel().get('coldicefisher', fetchType.username)
+montes = ProfileModel().get('montes', fetchType.username)
+michael = ProfileModel().get('michaelharris', 'username')
+rebecca = ProfileModel().get('rebecca', fetchType.username)
+
+from libs.cass_auth.businesses.business_model import BusinessModel, BusinessProfile
+mandh = BusinessModel().create('M&H Express', f'{michael.username}')
+BusinessModel().delete('M&H Express')
+mandh = BusinessModel().create('M&H Express', f'{michael.username}')
+
+
+# TEST BUSINESS
+from libs.cass_auth.businesses.business_model import BusinessModel, BusinessProfile
+mandh = BusinessModel().get('M&H Express')
+mandh.create_profile_no_login('Rebecca', '', 'Getahun', '', 'postmaster@bizniz.io')
+
+from libs.cass_auth.profiles.profile_model import ProfileModel
+
+profile_id = None 
+company_name = None
+try:
+    profile_id, company_name = ProfileModel().get_unassociated_account_information('postmaster@bizniz.io')
+except:
+    pass
+if profile_id is not None:
+    print (profile_id)
+    print (company_name)
+
+
+from libs.tests.tests import run_tests
+run_tests()
+
+from libs.tests.test_delete import delete_data
+delete_data()
+
+
+import eth_keys, eth_utils, binascii, os
+
+h = 48, 69, 2, 33, 0, 251, 85, 0, 189, 98, 205, 246, 249, 91, 55, 182, 46, 163, 39, 229, 210, 18, 61, 227, 187, 186, 96, 204, 99, 40, 64, 67, 192, 29, 87, 176, 142, 2, 32, 22, 151, 5, 234, 168, 244, 117, 193, 136, 181, 18, 39, 179, 232, 66, 238, 214, 139, 85, 91, 201, 134, 60, 123, 215, 116, 41, 49, 221, 132, 229, 167
+r = 'fb5500bd62cdf6f95b37b62ea327e5d2123de3bbba60cc63284043c01d57b08e'
+s = '169705eaa8f475c188b51227b3e842eed68b555bc9863c7bd7742931dd84e5a7'
+eth_keys.keys.Signature(vrs=(1,binascii.unhexlify(r), binascii.unhexlify(s)))
+
+rc = int.from_bytes(bytes(r, 'utf-8'), byteorder='big')
+sc = int.from_bytes(bytes(s, 'utf-8'), byteorder='big')
+eth_keys.keys.Signature(vrs=(1, rc, sc))
+eth_keys.keys.Signature(vrs=(1, int.from_bytes(binascii.unhexlify(r), byteorder='big'), int.from_bytes(binascii.unhexlify(s), byteorder='big')))
+
+
+from hashlib import sha256, sha384
+import binascii
+from ecdsa.ellipticcurve import Point
+from ecdsa import VerifyingKey, NIST384p
+public = '04c5a66e5efe72ec2ac0b028b8746ed46e374b5d10c06ca3beb5cfca94ffc09a9831eb147a312d787fd6916486e644340bf87944bf5be3aba1e668d878d581f1e48b3c3a8b588e53e200dfbcd2d573ff4e09678c843aa465365357ffee8b40ec82'
+message = b'Hellof'
+signature = 'f095de6188a640581625a533d720c798af97a9672f415bbcce35de0164c3abc532a0fb136dc9d0fd36521461f97759f69ad144fb7943b8e71417afb7b48edd276c90d551fab31afd358bb90fb08ab98ed6da06829d647da85521428e4debbbfb'
+verifying_key = VerifyingKey.from_string(bytes.fromhex(public), curve=NIST384p, hashfunc=sha384)
+verifying_key.verify(binascii.unhexlify(signature), message)
+
+
+from libs.cass_auth.documents.document_model import DocumentModel
+d = DocumentModel().get(id='24ade91f-6725-4999-9ff8-cbc7e21322cf')
+
+from libs.cass_auth.documents.document_model import DocumentModel
+
+DocumentModel().exists(id='236156bb-865f-4d18-9967-40727d6031ef')
+DocumentModel().exists(id='0e83c399-4157-4e21-9e44-c2c3e29caa67')
+
+DocumentModel().exists(profile_id='3975557a-cfec-4267-a60f-76a8ca1ffc0b', template_name="bizniz.business_disclaimer_1")
+
+from libs.cass_auth.businesses.business_model import BusinessModel
+from libs.cass_auth.profiles.profile_model import ProfileModel
+b = BusinessModel().get('Laurel Mountain Holdings')
+p = ProfileModel().get(username="coldicefisher")
+
+
+from libs.cass_auth.profiles.profile_functions import get_id_from_encrypted_username, get_id_from_username
+get_id_from_encrypted_username('725fba3d4eaae05d03998c21c1cb9bf1352d4db65ca5e0c5db81077c0a0a4010')
+
+
+
+from libs.cass_auth.businesses.business_model import BusinessModel
+from libs.cass_auth.profiles.profile_model import ProfileModel
+p = ProfileModel().get(encrypted_username='725fba3d4eaae05d03998c21c1cb9bf1352d4db65ca5e0c5db81077c0a0a4010')
+
+b = BusinessModel().get('Test 4 Biz')
+b.upsert_profile(p.id)

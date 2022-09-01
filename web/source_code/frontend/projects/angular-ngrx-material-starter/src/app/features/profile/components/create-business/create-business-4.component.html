@@ -1,0 +1,121 @@
+<div [ngClass]="routeAnimationsElements" class="container main-form-container mx-auto">
+  <mat-card>
+    <div class="">
+      <mat-card-title>
+        <!--<h3>{{ 'custom.user.profile.security.title' | translate }}</h3>-->
+      </mat-card-title>
+    </div>    
+    
+    <mat-card-content>
+      <div class="">
+        <div class="row w-100">
+          <div class="col align-right pointer">
+            <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+          </div>
+        </div>
+
+        <form [formGroup]="form" class="main-form-container" (ngSubmit)="onContinueClick()">        
+          <div class="row">
+            <div class="col">
+              <GoogleAutoAddress (setAddress)="getAddress($event)" addressType="geocode" cdkFocusInitial></GoogleAutoAddress>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="modal-control">
+                <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.insert-work-history.mailing-address1-label' | translate }}"
+                  formControlName="mailingAddress1Ctrl" cdkFocusInitial>
+                <mat-error *ngIf="form.get('mailingAddress1Ctrl')?.hasError('required')">
+                  {{ 'custom.user.profile.insert-work-history.mailing-address1-error' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="modal-control">
+                <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.insert-work-history.mailing-address2-label' | translate }}"
+                  formControlName="mailingAddress2Ctrl">
+                
+              </mat-form-field>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="modal-control">
+                <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.insert-work-history.mailing-city-label' | translate }}"
+                  formControlName="mailingCityCtrl">
+                <mat-error *ngIf="form.get('mailingCityCtrl')?.hasError('required')">
+                  {{ 'custom.user.profile.insert-work-history.mailing-city-error' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-form-field appearance="fill" class="modal-control">  
+                <input matInput placeholder="Mailing State" aria-label="State" [matAutocomplete]="autoPhyState" [formControl]="mailingStateCtrl">
+                <mat-error *ngIf="mailingStateCtrl?.hasError('required')">
+                  {{ 'custom.user.profile.insert-work-history.mailing-state-error' | translate }}
+                </mat-error>
+                <mat-autocomplete #autoPhyState="matAutocomplete">
+                  <mat-option *ngFor="let state of filteredMailingStates | async" [value]="state.abbreviation">
+                      <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
+                      <span>{{ state.name }}</span>
+                    
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+          
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="modal-control">
+                <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.insert-work-history.mailing-zip-label' | translate }}"
+                  formControlName="mailingZipCtrl">
+                <mat-error *ngIf="form.get('mailingZipCtrl')?.hasError('required')">
+                  {{ 'custom.user.profile.insert-work-history.mailing-zip-error' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <button mat-raised-button color="primary" class="btn-main"
+                    type="submit"
+              >
+                Continue
+              </button>
+              
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col">
+              <button mat-button class="btn-normal" type="button" (click)="onPreviousClick()">
+                Previous
+              </button>
+              <button mat-stroked-button class="btn-normal" type="button" (click)="onNoClick()">
+                Cancel
+              </button>
+            </div>
+          </div>
+    
+        
+        </form>
+      </div>
+    
+    </mat-card-content>
+  </mat-card>
+</div>
+    

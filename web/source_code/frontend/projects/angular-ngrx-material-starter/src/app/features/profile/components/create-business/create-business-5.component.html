@@ -1,0 +1,36 @@
+<div class="container main-form-container mx-auto">
+  <div class="row w-100">
+    <div class="col align-right pointer">
+      <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+    </div>
+  </div>
+
+  <bizniz-privacy-policy></bizniz-privacy-policy>
+  <bizniz-terms-and-conditions></bizniz-terms-and-conditions>
+  <bizniz-business-disclaimer></bizniz-business-disclaimer>
+  
+  <bizniz-signature
+        [profileId] = "(profileId$ | async)"
+        templateName = "bizniz.business_disclaimer_1"
+        
+        [fullName]="(profileFullName$ | async)"
+        [requirePlace] = "false"
+        [showBranding] = "false"
+        [allowDuplicates] = "true"
+        (documentSigned)="documentSent($event)"
+        [isLoading]="true"
+  ></bizniz-signature>
+  
+
+  <div class="row">
+    <div class="col">
+      <button mat-button class="btn-normal" type="button" (click)="onPreviousClick()">
+        Previous
+      </button>
+      <button mat-stroked-button class="btn-normal" type="button" (click)="onNoClick()">
+        Cancel
+      </button>
+    </div>
+  </div>
+
+</div>

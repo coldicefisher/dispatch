@@ -1,0 +1,278 @@
+<div class="container justify-content-center">
+  <div class="row " *ngIf="profile$ | async; let profile" [ngClass]="routeAnimationsElements">
+    <div class="col-12 mx-auto center-single-col">
+      
+      <!-- Container Div to float in center-->
+      <!-- Peronal Information ////////////////////////////////////////////////////////// -->
+      <mat-card>
+          <mat-card-title>
+            <h2>Personal Information</h2>
+          </mat-card-title>
+        <hr>
+        
+        <mat-card-content>
+          <div class="container">
+            <div class="row">
+
+        
+              <!--<div class="col-6 col-sm-12 pt-2 mt-2 mb-2 circular-image-container">-->
+              <div class="col-4 circular-image-container">
+                <ngx-uploadcare-widget
+                      class="file-input"
+                      [images-only]="true"
+                      crop="220x220, free, minimum upscale"
+                      
+                      #imageInput
+                      public-key="5060518fc33f1f61c346"
+                      (on-progress)="onProfileImgProgress($event)"
+                      (on-upload-complete)="onProfileImgUploadComplete($event)">
+                </ngx-uploadcare-widget>
+                
+                <div *ngIf="imgProgress$ | async; let progress; else imgLoading">
+                  
+                  <div *ngIf="progress>0; else imgLoading">
+                    <div class="circular-image-container">
+                      <mat-progress-spinner mode="determinate" [value]="(imgProgress$ | async)" diameter="200">
+                      </mat-progress-spinner>
+                    </div>
+                  </div>
+                </div>
+                
+                <ng-template #imgLoading>
+                  <div class="circular-image pointer-img" 
+                          rel="noopener noreferrer" target="_blank" (click)="imageInput.openDialog()">
+                    <div *ngIf="activeProfileImage$ | async; let profileImg; else imgBlank">
+                      <img alt src="{{ profileImg.item.cdnUrl }}">
+                    </div>
+                    
+                    <ng-template #imgBlank>
+                      <h3 class="circular-image-text">Select Image</h3>
+                    </ng-template>
+                  
+                  </div>
+                  
+                </ng-template>
+                
+              </div>
+            
+              <div class="col-8">
+                <div class="row">
+                  <div class="col-3">
+                    <mat-icon>person</mat-icon>
+                  </div>
+
+                  <div class="col-9">
+                    <span class="primary-text pointer" (click)="openUpdateProfileDialog('firstName', profile.firstName)">
+                      {{ profile.firstName }}
+                    </span>&nbsp;
+                    
+                    
+                    <span class="primary-text pointer" (click)="openUpdateProfileDialog('middleName', profile.middleName)" *ngIf="profile.middleName; else middleNameBlank">
+                        {{ profile.middleName }}
+                    </span>&nbsp;
+                    <ng-template #middleNameBlank>
+                      <span class="primary-text pointer" (click)="openUpdateProfileDialog('middleName', profile.middleName)">
+                      <i>(Middle)</i>
+                      </span>
+                    </ng-template>
+                    
+                    <span class="primary-text pointer" (click)="openUpdateProfileDialog('lastName', profile.lastName)">
+                      {{ profile.lastName }}
+                    </span>&nbsp;
+
+                    <span class="primary-text pointer" (click)="openUpdateProfileDialog('suffix', profile.suffix)" *ngIf="profile.suffix; else suffixBlank">
+                        {{ profile.suffix }}
+                    </span>
+                    <ng-template #suffixBlank>
+                      <span class="primary-text pointer" (click)="openUpdateProfileDialog('suffix', profile.suffix)">
+                        <i>(Suffix)</i>
+                      </span>
+                    </ng-template>
+                  </div>
+                </div>
+                  
+                <div class="row">
+                  <div class="col-3">
+                    <mat-icon>female</mat-icon>
+                    <mat-icon>male</mat-icon>
+                  </div>
+                
+                  <div class="col-9">
+                    &nbsp;
+                    <span class="primary-text pointer ml-2" (click)="openUpdateProfileDialog('gender', profile.gender)" *ngIf="profile.gender; else genderBlank">
+                      {{ profile.gender }}
+                    </span>
+                    <ng-template #genderBlank>
+                      <span class="primary-text pointer ml-2" (click)="openUpdateProfileDialog('gender', profile.gender)">
+                        <i>(Gender)</i>
+                      </span>
+                    </ng-template>
+                  </div>
+                </div>
+                
+              </div>
+          
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- End Personal Information ////////////////////////////////////////////////////// -->
+
+      <mat-accordion>
+
+        <!-- Phone Numbers and Emails /////////////////////////////////////////////////////-->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <div class="container">
+              <mat-panel-title>
+                <strong>{{ 'custom.user.profile.addresses-title' | translate }}</strong>
+                
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </div>
+          </mat-expansion-panel-header>
+          
+          <bizniz-otp-options></bizniz-otp-options>
+          <bizniz-add-address></bizniz-add-address>
+        
+        </mat-expansion-panel>
+        <!-- End Phone Numbers and Emails /////////////////////////////////////////////////-->
+
+        <!-- Security /////////////////////////////////////////////////////////////////////-->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <div class="container">
+              <mat-panel-title>
+                <strong>{{ 'custom.user.profile.security.title' | translate }}</strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                
+              </mat-panel-description>
+            </div>
+          </mat-expansion-panel-header>
+          <bizniz-change-password></bizniz-change-password>
+        </mat-expansion-panel>
+        <!-- End Security /////////////////////////////////////////////////////////////////-->
+
+        <!-- Security /////////////////////////////////////////////////////////////////////-->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <div class="container">
+              <mat-panel-title>
+                <strong>{{ 'custom.user.profile.privacy.title' | translate }}</strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                
+              </mat-panel-description>
+            </div>
+          </mat-expansion-panel-header>
+          <bizniz-privacy-settings (isDirtyEvent)="updateDirty($event)"></bizniz-privacy-settings>
+        </mat-expansion-panel>
+        <!-- End Security /////////////////////////////////////////////////////////////////-->
+      
+        <!-- Work History /////////////////////////////////////////////////////////////////-->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                  <mat-panel-title>
+                    <strong>{{ 'custom.user.profile.work-history-title' | translate }}</strong>
+                  </mat-panel-title>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                  <mat-panel-description>
+                    
+                    <div *ngIf="workHistories$ | async; let wh">
+                      <div  [ngSwitch]="(wh.length)">
+                        <div *ngSwitchCase="0">
+                          <strong>No Records</strong>
+                        </div>
+                        <div *ngSwitchCase="1">
+                          <strong>1 Record</strong>
+                        </div>
+                        <div *ngSwitchDefault>
+                          <strong>{{wh.length}} Records</strong>
+                        </div>
+                      </div>
+                    </div>
+                  
+                  </mat-panel-description>
+                </div>
+              </div>
+            </div>
+
+          </mat-expansion-panel-header>
+          <bizniz-profile-work-history (isDirtyEvent)="updateDirty($event)"></bizniz-profile-work-history>
+        </mat-expansion-panel>
+        <!-- End Work History /////////////////////////////////////////////////////////////-->
+
+        <!-- Address History //////////////////////////////////////////////////////////////-->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                  <mat-panel-title>
+                    <strong>{{ 'custom.user.profile.address-history-title' | translate }}</strong>
+                  </mat-panel-title>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                  <mat-panel-description>
+                
+                    <div *ngIf="addressHistories$ | async; let ah">
+                      <div  [ngSwitch]="(ah.length)">
+                        <div *ngSwitchCase="0">
+                          <strong>No Records</strong>
+                        </div>
+                        <div *ngSwitchCase="1">
+                          <strong>1 Record</strong>
+                        </div>
+                        <div *ngSwitchDefault>
+                          <strong>{{ah.length}} Records</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-panel-description>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel-header>
+          
+          <bizniz-profile-address-history (isDirtyEvent)="updateDirty($event)"></bizniz-profile-address-history>
+        
+        </mat-expansion-panel>
+        <!-- End Address History //////////////////////////////////////////////////////////-->
+      
+        <!-- Businesses Summary ///////////////////////////////////////////////////////////// -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                  <mat-panel-title>
+                    <strong>{{ 'custom.user.profile.businesses-summary-title' | translate }}</strong>
+                  </mat-panel-title>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                  <mat-panel-description>
+                
+                  </mat-panel-description>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel-header>
+          <bizniz-businesses-summary></bizniz-businesses-summary>  
+        </mat-expansion-panel>
+        <!-- End Businesses Summary /////////////////////////////////////////////////////////// -->
+
+      </mat-accordion>
+      
+      <div class="btn-main">
+        <button mat-raised-button color="primary" class="btn-wide" (click)="onDelete()">Delete Profile</button>
+      </div>
+
+    </div>
+  </div>
+</div>

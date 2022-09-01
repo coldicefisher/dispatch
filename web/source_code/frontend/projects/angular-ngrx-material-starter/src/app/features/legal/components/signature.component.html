@@ -1,0 +1,87 @@
+<div class="form-article-container mx-auto">
+
+  <form [formGroup]="form">
+    <mat-card>
+      <mat-card-title>
+        
+      </mat-card-title>
+
+      <mat-card-content class="">
+            
+        <div class="printable-container w-100">
+          <hr>
+          <div class="row w-100">
+            <div class="row">
+              <div class="col">
+                <h4 class="pr"><strong>Signature</strong></h4>
+              </div>
+            </div>
+            <div class="row pr pr-col-container w-100">
+              <div class="col col-6 w-100 pr pr-col">
+                <span class="signature">{{ signatureCtrl.value }}</span>
+              </div>
+              <div class="col col-6 w-100 text-right pr pr-col pr-right pr-text-sm signature-date">
+                {{ todayDate | date:'medium' }} ({{ timezone }})
+              </div>
+            </div>
+            <div class="container">
+              <div class="pr pr-end-col-container"></div>
+              <div class="row pr pr-line-500 pl-3"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="w-100 container-fluid mx-auto">
+          
+          <div class="row modal-row-single">
+            <div class="col">
+              <mat-form-field class="modal-control">
+                <input matInput class="" placeholder="{{ 'custom.legal.full-name-label' | translate }}"
+                  formControlName="fullNameCtrl" #signatureCtrl>
+                <mat-error *ngIf="form.get('fullNameCtrl')?.hasError('required')">
+                  {{ 'custom.legal.full-name-error' | translate }}
+                </mat-error>
+                <mat-error>
+                  {{ 'custom.auth.sign-up.error-pwd-confirm' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input matInput readonly formControlName="verifyNameCtrl">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-12 col-sm-4">
+              <button mat-stroked-button (click)="onPreview()" type="button" class="btn-main">Preview</button>
+            </div>
+            <div class="col col-12 col-sm-4">
+              <button mat-raised-button (click)="onClick()" 
+                  type="button" color="primary" class="btn-main" 
+                  [disabled]="form.invalid || this.disabled">Submit</button>
+            </div>
+            <div class="col col-12 col-sm-4"></div>
+          </div>
+        </div>
+
+        <div class="container printable-container">
+
+          <div class="row pr pr-span">
+            <div clas="col">
+              <h4><strong>Device Information:</strong></h4>
+            </div>
+          </div>
+          <div class="row pr pr-span">
+            <div class="col">
+              {{ deviceInfo | async }}
+            </div>
+          </div>
+          
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

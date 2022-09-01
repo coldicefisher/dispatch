@@ -1,0 +1,53 @@
+<div class="container" class="main-form-container mx-auto" [ngSwitch]="(loginStatus$ | async)">
+  
+    <!--<div class="col-12">-->
+
+      <div *ngSwitchCase="'start'">
+        <bizniz-check-device></bizniz-check-device>
+      </div>
+
+      <div *ngSwitchCase="'trusted_not_authenticated'"> 
+        <bizniz-check-pwd></bizniz-check-pwd>
+      </div>
+
+      <div  *ngSwitchCase="'verification_options'">
+        <bizniz-otp-options></bizniz-otp-options>
+      </div>
+      
+      <div *ngSwitchCase="'verification_sent'">
+        <bizniz-otp-verify></bizniz-otp-verify>
+      </div>
+      
+      <div *ngSwitchCase="'sign_up'">
+        <bizniz-sign-up></bizniz-sign-up>
+      </div>
+
+      <div *ngSwitchCase="'retrieve_username'">
+        <bizniz-retrieve-username></bizniz-retrieve-username>
+      </div>
+      
+      <div *ngSwitchCase="'retrieve_username_otp_verify'">
+        <bizniz-retrieve-username-otp-verify></bizniz-retrieve-username-otp-verify>
+      </div>
+    
+      <div *ngSwitchCase="'retrieve_username_questions_verify'">
+        <bizniz-retrieve-username-questions-verify></bizniz-retrieve-username-questions-verify>
+      </div>
+      <div *ngSwitchCase="'reset_password'">
+        <bizniz-reset-password></bizniz-reset-password>
+      </div>
+
+      
+      <div *ngSwitchCase="'reset_password_set'">
+        <bizniz-reset-password-set></bizniz-reset-password-set>
+      </div>
+      
+      <div *ngSwitchDefault> 
+        <bizniz-check-device></bizniz-check-device>
+      </div>
+      
+      <!--
+      <bizniz-reset-username *ngIf="bizniz-reset-username"></bizniz-reset-username>
+      <bizniz-reset-password *ngIf="bizniz-reset-password"></bizniz-reset-password>-->
+  
+</div>

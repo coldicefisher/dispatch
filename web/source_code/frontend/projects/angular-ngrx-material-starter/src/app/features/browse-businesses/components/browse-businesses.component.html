@@ -1,0 +1,39 @@
+<div *ngFor="let business of businesses$ | async">
+  <mat-card class="pointer" (click)="onBusinessClick(business.id)">
+    <mat-card-title>
+      <h3>{{ business.displayName }}</h3>
+    </mat-card-title>
+    <mat-card-content>
+      <div class="container">
+        <div class="row">
+          <label>MC Number: {{ business.mcNumber }}</label><br>
+        </div>
+        <div class="row">
+          <label>DOT Number: {{ business.dotNumber }}</label><br>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <label class="align-left main-text">Physical Address</label><br><br>
+            <div *ngFor="let address of business.physicalAddresses">
+              <label>{{ address.address1 }}</label><br>
+              <label *ngIf="(address.address2 && address.address != '')">{{ address.address2 }}<br></label>
+              <label>{{ address.city }} {{ address.state }} {{ address.zip }}</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <label class="align-left main-text">Mailing Address</label><br><br>
+            <div *ngFor="let address of business.physicalAddresses">
+              <label>{{ address.address1 }}</label><br>
+              <label *ngIf="(address.address2 && address.address != '')">{{ address.address2 }}<br></label>
+              <label>{{ address.city }} {{ address.state }} {{ address.zip }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>

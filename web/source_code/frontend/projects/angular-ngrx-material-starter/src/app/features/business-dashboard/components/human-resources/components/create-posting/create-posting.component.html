@@ -1,0 +1,11 @@
+<p>Create posting</p>
+
+<ng-container *ngIf="createPostingForm$ | async; let postingForm">
+  <ng-container *ngIf="!postingForm.applicationId; else postingInfo">
+    <SelectTemplate></SelectTemplate>
+  </ng-container>
+
+  <ng-template #postingInfo>
+    <p>Posting Info</p>
+
+</ng-template>

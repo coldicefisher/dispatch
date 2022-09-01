@@ -1,0 +1,77 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+@use "@material/radio/styles";
+
+@import 'styles-variables';
+
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import 'styles-reset';
+
+@include mat.core();
+
+@import './themes/default-theme';
+@import './themes/light-theme';
+@import './themes/black-theme';
+@import './themes/nature-theme';
+
+@import 'styles-reset.scss-theme';
+@import './app/app/app.component.scss-theme';
+@import './app/shared/big-input/big-input/big-input.component.scss-theme';
+@import './app/features/about/about/about.component.scss-theme';
+@import './app/features/examples/notifications/components/notifications.component.scss-theme';
+@import './app/features/examples/todos/components/todos-container.component.scss-theme';
+@import './app/features/examples/stock-market/components/stock-market-container.component.scss-theme';
+@import './app/features/examples/theming/parent/parent.component.scss-theme';
+@import './app/features/examples/theming/child/child.component.scss-theme';
+@import './app/features/examples/examples/examples.component.scss-theme';
+
+@mixin custom-components-theme($theme) {
+  @include bizniz-styles-reset-theme($theme);
+  @include bizniz-app-component-theme($theme);
+  @include bizniz-about-component-theme($theme);
+  @include bizniz-big-input-component-theme($theme);
+  @include bizniz-notifications-component-theme($theme);
+  @include bizniz-todos-container-component-theme($theme);
+  @include bizniz-stock-market-container-component-theme($theme);
+  @include bizniz-parent-component-theme($theme);
+  @include bizniz-child-component-theme($theme);
+  @include bizniz-examples-component-theme($theme);
+}
+
+.default-theme {
+  @include mat.all-component-themes($bizniz-theme);
+  @include custom-components-theme($bizniz-theme);
+}
+
+.light-theme {
+  @include mat.all-component-themes($bizniz-light-theme);
+  @include custom-components-theme($bizniz-light-theme);
+}
+
+.black-theme {
+  @include mat.all-component-themes($bizniz-black-theme);
+  @include custom-components-theme($bizniz-black-theme);
+}
+
+.nature-theme {
+  @include mat.all-component-themes($bizniz-nature-theme);
+  @include custom-components-theme($bizniz-nature-theme);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import './styles/buttons.scss';
+@import './styles/text-effects.scss';
+@import './styles/mat-cards.scss';
+@import './styles/dialog.scss';
+@import './styles/dashboard.scss';
+@import './styles/forms.scss';
+@import './styles/menus.scss';
+@import './styles/images.scss';
+@import './styles/toolbars.scss';
+@import './styles/business-profile.scss';
+@import './styles/bizniz-table.scss';
+@import './styles/about.scss';

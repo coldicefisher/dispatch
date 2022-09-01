@@ -1,0 +1,23 @@
+.bizniz-table {
+  .row {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  .row::after {
+    content :"";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.54 );
+  }
+  
+};
+
+.bizniz-table-header {
+  color: rgba(0, 0, 0, 0.54 );
+  
+  div span {
+    color: rgba(0, 0, 0, 0.54 );
+  }
+
+};

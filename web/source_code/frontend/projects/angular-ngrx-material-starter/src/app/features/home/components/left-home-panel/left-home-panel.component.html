@@ -1,0 +1,99 @@
+  <div class="wrapper ml-3">
+    <div *ngIf="profile$ | async; let profile">
+      <div class="container ps-3">
+        <div class="d-flex flex-row w-100">
+          <div class="d-flex flex-column">
+            <ngx-uploadcare-widget
+                  class="file-input"
+                  [images-only]="true"
+                  crop="220x220, free, minimum upscale"
+                  
+                  #imageInput
+                  public-key="5060518fc33f1f61c346"
+                  (on-progress)="onProfileImgProgress($event)"
+                  (on-upload-complete)="onProfileImgUploadComplete($event)">
+            </ngx-uploadcare-widget>
+            
+          <div *ngIf="imgProgress$ | async; let progress; else imgLoading">
+            
+            <div *ngIf="progress>0; else imgLoading">
+              <div class="">
+                <mat-progress-spinner mode="determinate" [value]="(imgProgress$ | async)" diameter="50">
+                </mat-progress-spinner>
+              </div>
+            </div>
+          </div>
+            
+          <ng-template #imgLoading>
+            <div class="user-picture pointer-img" 
+                    rel="noopener noreferrer" target="_blank" (click)="imageInput.openDialog()">
+              <div *ngIf="(activeProfileImage$ | async); let profileImg; else imgBlank" class="user-image">
+                <img alt src="{{ profileImg.item.cdnUrl }}">
+              </div>
+              <ng-template #imgBlank>
+                <h4 class="user-image-text" *ngIf="(profile.profileId)">Select Image</h4>
+              </ng-template>
+            
+            </div>
+          </ng-template>
+          
+        </div>
+        <div class="d-flex flex-column justify-content-center ps-3">
+          <span class="pointer main-text" (click)="onProfileNavigateClick()">
+            {{profile.firstName}} {{profile.middleName}} {{profile.lastName}} {{profile.suffix}}
+          </span>
+          <!--<span class="main-text pointer" (click)="onProfileNavigateClick()">{{profile.firstName}} {{profile.middleName}} {{profile.lastName}} {{profile.suffix}}</span>-->
+        </div> <!-- End Profile Image row -->
+      </div> <!-- End container -->
+      
+      <!-- Business Name -->
+      <!--<div class="container pt-5 ps-0" *ngIf="business$ | async; let business">-->
+      <div class="container pt-5 ps-0" *ngIf="business$ | async; let business">
+        <div *ngIf="business.name">
+            <label class="pointer d-inline-flex ps-0 w-100" [routerLink]="[navigation[0].link]"
+              routerLinkActive="active" matTooltip="Company Dashboard">
+            <span class="h-100 p-0 d-inline-flex"><mat-icon class="p-0">store</mat-icon></span>
+            <label class="ps-4 h-100 d-inline-flex">
+              {{ business.name }}
+            </label>
+          </label>
+        </div>
+
+        <div class="row pt-2">
+          <div *ngIf="isAdministrator$ | async" class="col-2">
+            <span class="pointer d-inline-flex" (click)="onDashboardNavigateClick('user-management')">
+              <mat-icon class="p-0" matTooltip="Manage Users">manage_accounts</mat-icon>
+            </span>
+          </div>
+          <div *ngIf="isDispatching$ | async" class="col-2">
+            <span class="pointer d-inline-flex" (click)="onDashboardNavigateClick('dispatching')">
+              <mat-icon class="p-0" matTooltip="Manage Dispatching">support_agent</mat-icon>
+            </span>
+          </div>
+          <div *ngIf="isHumanResources$ | async" class="col-2">
+            <span class="pointer d-inline-flex" (click)="onDashboardNavigateClick('human-resources')">
+              <mat-icon class="p-0" matTooltip="Manage Human Resources">person_add</mat-icon>
+            </span>
+          </div>
+          <div *ngIf="isAssets$ | async" class="col-2">
+            <span class="pointer d-inline-flex" (click)="onDashboardNavigateClick('human-resources')">
+              <mat-icon class="p-0" matTooltip="Manage Assets">local_shipping</mat-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div> <!-- End Business Navigation icons -->
+  </div> <!-- End profile information -->
+  
+<div class="container mt-5 w-100" *ngIf="profile$ | async; let profile">
+  <div class="row" *ngIf="profile.profileId">
+    <button mat-button class="dashboard-button" (click)="onHomeViewNavigateClick('my-feed')" [ngClass]="setActive('my-feed')">
+      View My Feed
+    </button>
+  </div>
+  <div class="row">
+    <button mat-button class="dashboard-button" (click)="onHomeViewNavigateClick('browse-businesses')" [ngClass]="setActive('browse-businesses')">
+      Browse Businesses
+    </button>
+  </div>
+</div>

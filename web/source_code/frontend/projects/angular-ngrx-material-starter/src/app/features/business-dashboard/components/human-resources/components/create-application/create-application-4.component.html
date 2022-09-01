@@ -1,0 +1,161 @@
+
+<div class="row w-100">
+  <div class="col align-right pointer">
+    <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+  </div>
+</div>
+
+<form [formGroup]="driving" *ngIf="createApplication$ | async; let application">
+  <h3>{{ 'custom.create-application.driving-history-title' | translate }}</h3>
+
+  <div class="row">
+    <div class="col col-12 col-sm-6">
+      <mat-form-field class="modal-control w-100">
+        <mat-label>{{ 'custom.create-application.driving-history-include-label' | translate }}</mat-label>
+        <mat-select formControlName="drivingHistoryIncludeCtrl" 
+        class="modal-control" appearance="fill" required
+        (selectionChange)="onSelectDrivingHistory()">
+          <mat-option value="No">No</mat-option>
+          <mat-option value="Yes">Yes</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </div>
+  
+  <ng-container *ngIf="(application.drivingHistoryInclude) == true">
+    <div class="row">
+      <div class="col col-12 col-sm-6">
+        <mat-form-field appearance="fill" class="modal-control">
+          <mat-label>{{ 'custom.create-application.license-history-lookback-label' | translate }}</mat-label>
+          <input matInput placeholder="365"
+            formControlName="licenseHistoryLookbackCtrl">
+          <mat-error *ngIf="driving.get('licenseHistoryLookbackCtrl').hasError('required')">
+            {{ 'custom.create-application.license-history-lookback-error' | translate }}
+          </mat-error>
+          <mat-error *ngIf="driving.get('licenseHistoryLookbackCtrl').hasError('numericError')">
+            {{ 'custom.create-application.lookback-numeric-error' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    
+    <div class="row modal-row-single">
+      <div class="col-12">
+        <mat-form-field appearance="fill" class="modal-control">
+          <mat-label>{{ 'custom.create-application.license-history-disclaimer-label' | translate }}</mat-label>
+          <textarea matInput placeholder=""
+            formControlName="licenseHistoryDisclaimerCtrl" class="textarea-paragraph"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col col-12 col-sm-6">
+        <mat-form-field class="modal-control">
+          <mat-label>{{ 'custom.create-application.accident-history-include-label' | translate }}</mat-label>
+          <mat-select formControlName="accidentHistoryIncludeCtrl" 
+          class="modal-control w-100" appearance="fill" required
+          (selectionChange)="onSelectAccidentHistory()">
+            <mat-option value="No">No</mat-option>
+            <mat-option value="Yes">Yes</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+      </div>
+    </div>
+    <ng-container *ngIf="(application.accidentHistoryInclude) == true">
+      <div class="row">
+        <div class="col col-12 col-sm-6">
+          <mat-form-field appearance="fill" class="modal-control">
+            <mat-label>{{ 'custom.create-application.accident-history-lookback-label' | translate }}</mat-label>
+            <input matInput placeholder="365"
+              formControlName="accidentHistoryLookbackCtrl">
+            <mat-error *ngIf="driving.get('accidentHistoryLookbackCtrl').hasError('required')">
+              {{ 'custom.create-application.accident-history-lookback-error' | translate }}
+            </mat-error>
+            <mat-error *ngIf="driving.get('accidentHistoryLookbackCtrl').hasError('numericError')">
+              {{ 'custom.create-application.lookback-numeric-error' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <div class="row modal-row-single">
+        <div class="col-12">
+          <mat-form-field appearance="fill" class="modal-control">
+            <mat-label>{{ 'custom.create-application.accident-history-disclaimer-label' | translate }}</mat-label>
+            <textarea matInput placeholder=""
+              formControlName="accidentHistoryDisclaimerCtrl" class="textarea-paragraph"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+        
+    </ng-container>
+    <!-- End license history lookback. Begin equipment experience -->
+    
+    <div class="row">
+      <div class="col col-12 col-sm-6">
+        <mat-form-field class="modal-control w-100">
+          <mat-label>{{ 'custom.create-application.equipment-experience-include-label' | translate }}</mat-label>
+          <mat-select formControlName="equipmentExperienceIncludeCtrl" 
+          class="modal-control w-100" appearance="fill" required
+          (selectionChange)="onSelectEquipmentExperience()">
+            <mat-option value="No">No</mat-option>
+            <mat-option value="Yes">Yes</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+      </div>
+    </div>
+  
+    <ng-container *ngIf="(application.equipmentExperienceInclude) == true">
+      <div class="row">
+        <div class="col col-10 col-sm-3">
+          <mat-form-field appearance="fill" class="modal-control">
+            <input matInput placeholder="{{ 'custom.create-application.equipment-type-label' | translate }}"
+              formControlName="equipmentTypeCtrl">
+          </mat-form-field>
+        </div>
+        
+        <div class="col col-2 col-sm-1">
+          <mat-icon class="text-success pointer" (click)="onAddEquipmentTypeClick()">add</mat-icon>
+        </div>
+        
+        <div class="col col-12 col-sm-4">
+          <ng-container *ngFor="let type of application.equipmentTypes">
+            <span class="inline-span pointer" (click)="onRemoveEquipmentTypeClick(type)">
+              {{ type }}
+              <mat-icon class="pointer text-danger">remove</mat-icon>
+            </span>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container> <!-- End equipment experience -->  
+  </ng-container> <!-- End license experience -->
+  
+</form>
+
+<div class="row">
+  <div class="col col-12 col-md-4">
+    <button mat-stroked-button color="primary" class="btn-main"
+            type="button" (click)="onContinueClick()"
+            [disabled]="driving.invalid">
+      Continue
+    </button>
+  </div>
+
+</div>
+
+<div class="row" >
+<div class="col">
+  <button mat-button class="btn-normal" type="button" (click)="onPreviousClick()">
+    Previous
+  </button>
+
+  <button mat-button class="btn-normal" type="button" 
+        (click)="onResetClick()">
+    Cancel
+  </button>
+</div>
+</div>

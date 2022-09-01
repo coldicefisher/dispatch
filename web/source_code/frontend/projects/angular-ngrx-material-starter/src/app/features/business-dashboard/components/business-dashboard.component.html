@@ -1,0 +1,100 @@
+
+
+  <mat-drawer-container class="dashboard-container" [hasBackdrop]="false" style="list-style-type: none !important">
+    <mat-drawer #drawer [mode]="menuMode" [opened]="screenWidth > 992" class="dashboard-sidenav">
+      <mat-icon class="pointer" (click)="drawer.toggle()" #toggleMenu>menu_open</mat-icon>
+        
+        <button mat-button (click)="onNavigate('dashboard-home')" class="pointer dashboard-button" 
+                            [ngClass]="setActive('dashboard-home')"
+                            >
+          {{'custom.dashboard.menu.dashboard-home' | translate}}
+        </button>
+        <!--
+        <button mat-button (click)="onNavigate('human-resources')" class="pointer dashboard-button" 
+                [ngClass]="setActive('human-resources')"
+                [disabled]="(hasHumanResourcesPermission$ | async) == false">
+        {{'custom.dashboard.menu.human-resources' | translate}}
+        </button>
+      -->
+        <button mat-button (click)="onNavigate('human-resources')" class="pointer dashboard-button" 
+                [ngClass]="setActive('human-resources')"
+                *ngIf="(hasHumanResourcesPermission$ | async)">
+        {{'custom.dashboard.menu.human-resources' | translate}}
+        </button>
+
+        <button mat-button (click)="onNavigate('dispatching')" class="pointer dashboard-button" 
+                            [ngClass]="setActive('dispatching')"
+                            *ngIf="(hasDispatchingPermission$ | async)">
+          {{'custom.dashboard.menu.dispatching' | translate}}
+        </button>
+        
+        <button mat-button (click)="onNavigate('assets')" class="pointer dashboard-button" 
+                            [ngClass]="setActive('assets')"
+                            *ngIf="(hasAssetsPermission$ | async)">
+          {{'custom.dashboard.menu.assets' | translate}}
+        </button>
+        <button mat-button (click)="onNavigate('user-management')" class="pointer dashboard-button" 
+                            [ngClass]="setActive('user-management')"
+                            *ngIf="(hasAdminPermission$ | async)">
+          {{'custom.dashboard.menu.user-management' | translate}}
+        </button>
+        <button mat-button (click)="onNavigate('business-profile')" class="pointer dashboard-button" 
+                            [ngClass]="setActive('business-profile')"
+                            *ngIf="(hasAdminPermission$ | async)">
+          {{'custom.dashboard.menu.business-profile' | translate}}
+        </button>
+        
+        
+      <!--
+      <div *ngFor="let item of navigation" class="dashboard-menu">
+        <button mat-button (click)="onNavigate(item.link)" class="pointer" routerLinkActive="active">
+          {{item.label | translate}}
+        </button>
+      </div>
+    -->
+    </mat-drawer>
+    <mat-drawer-content>
+      <!-- Content -->
+      <div class="wrapper h-100">
+        
+        <div *ngIf="drawer.opened != true" class="overlay pointer">
+          <mat-icon class="pointer" (click)="drawer.toggle()" class="overlay-content">menu</mat-icon>
+        </div>
+      
+        <div class="container-fluid">
+          <div class="row" [ngSwitch]="(currentView$ | async)">
+            <div class="col-12 w-100 m-0 p-0">
+        
+              <div *ngSwitchCase="'human-resources'">
+                <bizniz-human-resources></bizniz-human-resources>
+              </div>
+              <div *ngSwitchCase="'dispatching'">
+                <bizniz-dispatching></bizniz-dispatching>
+              </div>
+              <div *ngSwitchCase="'assets'">
+                <bizniz-assets></bizniz-assets>
+              </div>
+              <div *ngSwitchCase="'user-management'">
+                <bizniz-user-management></bizniz-user-management>
+              </div>
+              <div *ngSwitchCase="'business-profile'">
+                <bizniz-business-profile></bizniz-business-profile>
+              </div>
+              <div *ngSwitchCase="'create-application'">
+                <CreateApplication></CreateApplication>
+              </div>
+              <div *ngSwitchCase="'create-posting'">
+                <CreatePosting></CreatePosting>
+              </div>
+              <div *ngSwitchDefault>
+                <bizniz-dashboard-home>Dashboard</bizniz-dashboard-home>
+              </div>
+                
+            </div>
+          </div>
+        </div>        
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+

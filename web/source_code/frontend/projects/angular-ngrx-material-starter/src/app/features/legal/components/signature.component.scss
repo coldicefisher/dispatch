@@ -1,0 +1,24 @@
+
+.signature-block {
+  
+  min-width: 400px;
+  max-width: 750px;
+  border-bottom: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: black;
+  
+}
+.signature {
+  // text-decoration: underline;
+  font-size: 16px;
+  text-align: right !important;
+  
+}
+.signature-date {
+  text-align: right !important;
+}
+.pr-line-500 {
+  border-top: 2px;
+  border-top-color: black;
+  border-top-style: solid;
+}

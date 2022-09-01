@@ -1,0 +1,41 @@
+  <form [formGroup]="form">
+    
+    <div class="row" >
+      <div class="col">
+        <mat-form-field class="modal-control" >
+          <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.create-business.name-label' | translate }}"
+                  formControlName="nameCtrl" 
+                  (blur)="checkName()"
+                  cdkFocusInitial>
+          <mat-error *ngIf="form.get('nameCtrl')?.hasError('required')">
+            {{ 'custom.user.profile.create-business.name-error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <ng-container *ngIf="nameValid$ | async; then invalidName">
+        </ng-container>
+        <ng-template #invalidName>
+          <label class="form-element text-danger">
+            <i class="material-icons">{{ (nameValid$ | async)  ? 'cancel' :
+              'check_circle' }}</i>
+              {{ 'custom.user.profile.create-business.name-exists-error' | translate }}
+          </label>
+        </ng-template>
+      </div>
+    </div>
+  </form>
+
+
+  <!--
+  USAGE:
+      <CheckBusinessName 
+          (setBusinessName)="getBusinessName($event)" 
+      ></CheckBusinessName>
+  
+      $event returns { exists: boolean, businessName: string, empty: boolean }
+-->
+  

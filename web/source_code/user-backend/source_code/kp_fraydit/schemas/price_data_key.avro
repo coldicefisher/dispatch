@@ -1,0 +1,13 @@
+{
+    "doc": "Automatically created by kp_fraydit. Same keys are stored on the same partition. Each symbol will be stored by the month",
+    "fields": [
+        {
+            "doc": "",
+            "name": "symbol",
+            "type": "string"
+        }
+    ],
+    "name": "price_data_key",
+    "namespace": "kp_fraydit.price_data_key",
+    "type": "record"
+}

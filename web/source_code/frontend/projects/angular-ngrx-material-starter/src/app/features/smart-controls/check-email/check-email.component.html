@@ -1,0 +1,43 @@
+<form [formGroup]="form">
+    
+  <div class="row" >
+    <div class="col">
+      <mat-form-field class="modal-control" >
+        <input matInput class="modal-control" placeholder="{{ 'custom.smart-controls.check-email.email-label' | translate }}"
+                formControlName="emailCtrl" 
+                (blur)="checkEmail()"
+                cdkFocusInitial>
+        <mat-error *ngIf="form.get('emailCtrl')?.hasError('required')">
+          {{ 'custom.smart-controls.check-email.email-required-error' | translate }}
+        </mat-error>
+        <mat-error *ngIf="form.get('emailCtrl')?.hasError('validEmail')">
+          {{ 'custom.smart-controls.check-email.email-format-error' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ng-container *ngIf="emailValid$ | async; then invalidEmail">
+      </ng-container>
+      <ng-template #invalidEmail>
+        <label class="form-element text-danger">
+          <i class="material-icons">{{ (emailValid$ | async)  ? 'cancel' :
+            'check_circle' }}</i>
+            {{ 'custom.smart-controls.check-email.email-exists-error' | translate }}
+        </label>
+      </ng-template>
+    </div>
+  </div>
+</form>
+
+
+<!--
+USAGE:
+    <CheckEmail
+        (setEmail)="getEmail($event)" 
+    ></CheckEmail>
+
+    $event returns { exists: boolean, email: string, wrongFormat: boolean, empty: boolean, hasError: boolean }
+-->

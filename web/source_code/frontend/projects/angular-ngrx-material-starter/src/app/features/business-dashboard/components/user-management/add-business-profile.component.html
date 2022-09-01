@@ -1,0 +1,153 @@
+
+<div class="modal-dialog">
+
+    <div class="row">
+      <div class="col align-right pointer">
+        <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+      </div>
+    </div>
+
+    <div *ngIf="(addStatus) === 'start'">
+      <h3>Find User</h3>
+      <SearchProfiles 
+            (setProfile)="getProfile($event)" 
+            searchType="profile"
+            [filterIds]="(existingIds$ | async)" 
+            cdkFocusInitial>
+      </SearchProfiles>
+      
+      <form [formGroup]="addUser">
+
+        <h3>Or Add new user</h3>
+
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field class="modal-control">
+              <input matInput class="modal-control" placeholder="{{ 'custom.dashboard.user-management.add-profile.first-name-label' | translate }}"
+                formControlName="firstNameCtrl">
+              <mat-error *ngIf="addUser.get('firstNameCtrl')?.hasError('required')">
+                {{ 'custom.dashboard.user-management.add-profile.first-name-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field class="modal-control">
+              <input matInput class="modal-control" placeholder="{{ 'custom.dashboard.user-management.add-profile.middle-name-label' | translate }}"
+                formControlName="middleNameCtrl">
+              
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field class="modal-control">
+              <input matInput class="modal-control" placeholder="{{ 'custom.dashboard.user-management.add-profile.last-name-label' | translate }}"
+                formControlName="lastNameCtrl">
+              <mat-error *ngIf="addUser.get('lastNameCtrl')?.hasError('required')">
+                {{ 'custom.dashboard.user-management.add-profile.last-name-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field class="modal-control">
+              <input matInput class="modal-control" placeholder="{{ 'custom.dashboard.user-management.add-profile.suffix-label' | translate }}"
+                formControlName="suffixCtrl">
+              
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row modal-row-single">
+          <div class="col">
+            <CheckEmail (setEmail)="getEmail($event)"></CheckEmail>
+          </div>
+        </div>
+
+        <div class="col col-12 col-md-4">
+          <button mat-raised-button color="primary" class="btn-main"
+                  type="button"  (click)="onContinueNewUserClick()"
+                  [disabled]="addUser.invalid || (emailError)">
+            Continue
+          </button>
+        </div>
+        
+      </form>
+    </div>
+
+    <div *ngIf="(addStatus) === 'setPermissions'">
+      <h2>Set the permissions for {{ fullName }}</h2>
+      <form [formGroup]="setPermissions">
+        <div class="row">
+          <div class="col align-center">
+            <h3>Employee Privileges</h3>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col col-12 col-sm-6">
+            <mat-checkbox formControlName="employeeCtrl" [disabled]="true">Employee</mat-checkbox>
+          </div>
+          <div class="col col-12 col-sm-6">
+            <mat-checkbox formControlName="driverCtrl">Driver</mat-checkbox>
+          </div>
+        </div>
+        
+        <hr>
+        
+        <div class="row">
+          <div class="col align-center">
+            <h3>Operations Privileges</h3>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-12 col-sm-4">
+            <mat-checkbox formControlName="hrCtrl" [disabled]="!isExisting">Human Resources</mat-checkbox>
+          </div>
+          <div class="col col-12 col-sm-4">
+            <mat-checkbox formControlName="dispatchingCtrl" [disabled]="!isExisting">Dispatching</mat-checkbox>
+          </div>
+          <div class="col col-12 col-sm-4">
+            <mat-checkbox formControlName="assetsCtrl" [disabled]="!isExisting">Assets</mat-checkbox>
+          </div>
+        </div>
+        
+        <hr>
+
+        <div class="row">
+          <div class="col align-center">
+            <h3>Full Access</h3>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-checkbox formControlName="adminCtrl" [disabled]="!isExisting">Administrator</mat-checkbox>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col">
+            <button mat-raised-button color="primary" class="btn-main"
+                  type="button" (click)="onAddUserClick()"
+            >
+            Add User
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row" >
+      <div class="col">
+        
+        <button mat-button class="btn-normal" type="button" 
+              (click)="onNoClick()" >
+          Cancel
+        </button>
+      </div>
+    </div>
+  
+</div>

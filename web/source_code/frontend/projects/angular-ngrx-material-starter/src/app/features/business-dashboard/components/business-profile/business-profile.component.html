@@ -1,0 +1,123 @@
+<!--
+<mat-toolbar class="toolbar dashboard-toolbar align-bottom w-100 p-0 ml-0 mr-0">
+  <form class="w-100 h-100">
+    <div class="container d-flex ms-3">
+      <div class="row align-items-end w-100 mb-3">
+        <div class="col-5 toolbar-control mb-3">
+          Business Profile Toolbar
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-toolbar>
+-->
+
+<div class="container container-business" *ngIf="business$ | async; let business">
+  <div class="banner row round-corners">
+
+
+  <!--<div class="col-6 col-sm-12 pt-2 mt-2 mb-2 circular-image-container">-->
+  
+    <ngx-uploadcare-widget
+          class="file-input"
+          [images-only]="true"
+          crop="1280x400, free, minimum upscale"
+          
+          #imageInput
+          public-key="5060518fc33f1f61c346"
+          (on-progress)="onProfileImgProgress($event)"
+          (on-upload-complete)="onProfileImgUploadComplete($event)">
+    </ngx-uploadcare-widget>
+    
+    <div *ngIf="imgProgress$ | async; let progress; else imgLoading">
+      
+      <div *ngIf="progress>0; else imgLoading">
+        
+        <mat-progress-spinner mode="determinate" [value]="(imgProgress$ | async)" diameter="200">
+        </mat-progress-spinner>
+      
+      </div>
+    </div>
+    
+    <ng-template #imgLoading>
+      <div class="pointer-img" 
+              rel="noopener noreferrer" target="_blank" (click)="imageInput.openDialog()">
+              
+        <div *ngIf="activeBusinessProfileImage$ | async; let profileImg; else imgBlank" class="banner-image round-corners" [style.background]="'url(' + profileImg.item.cdnUrl + ') no-repeat'">
+        </div>
+        
+        <ng-template #imgBlank>
+          <h3 class="circular-image-text">Select Image</h3>
+        </ng-template>
+      
+      </div>
+      
+    </ng-template>
+  </div>
+
+  <div class="row">
+    
+    <div class="col col-9">
+      
+      
+      <h2 class="">{{ business.name }}</h2>
+      <div *ngIf="business.about; else aboutBlank" class="pointer" (click)="onEditClick('about', business.about)">
+          <p class="preserve-format">{{ business.about }}</p>
+      </div>
+      <ng-template #aboutBlank>
+          <div class="pointer" (click)="onEditClick('about', business.about)">
+            <h4>Add About</h4>
+          </div>
+      </ng-template>
+    </div>
+
+    
+
+    <div class="col col-3">
+    
+      <mat-card>
+        <mat-card-title>
+          <h3>Physical Address</h3>
+        </mat-card-title>
+        <mat-card-content>
+          <div *ngFor="let address of business.physicalAddresses" class="pointer" (click)="onInsertAddressClick('Physical')">
+            <span>{{ address.address1 }}</span><br>
+            <span *ngIf="(address.address2 && address.address != '')">{{ address.address2 }}<br></span>
+            <span>{{ address.city }} {{ address.state }} {{ address.zip }}</span>
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>
+          <h3>Mailing Address</h3>
+        </mat-card-title>
+        <mat-card-content>
+          <div *ngFor="let address of business.mailingAddresses" class="pointer" (click)="onInsertAddressClick('Mailing')">
+            <span>{{ address.address1 }}</span><br>
+            <span *ngIf="(address.address2 && address.address != '')">{{ address.address2 }}<br></span>
+            <span>{{ address.city }} {{ address.state }} {{ address.zip }}</span>
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>
+          <h3>FMCSA Details</h3>
+        </mat-card-title>
+          
+        <mat-card-content>
+          
+          <span class="pointer" (click)="onEditClick('mcNumber', business.mcNumber)"><strong>MC Number:</strong> {{ business.mcNumber }}</span><br>
+          <span class="pointer" (click)="onEditClick('dotNumber', business.dotNumber)"><strong>DOT Number:</strong> {{ business.dotNumber }}</span><br>
+
+        </mat-card-content>
+      </mat-card>
+
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,36 @@
+<form [formGroup]="form">
+<!--
+  <input matInput class="input"
+    type="text"
+    formControlName="autocompleteInput"
+    #addressText style="padding: 12px 20px; border: 1px solid #ccc; width: 400px"
+  >
+-->
+  <mat-form-field class="modal-control">
+    <input matInput class="modal-control" placeholder="{{ 'custom.smart-controls.google-ac-address.ac-label' | translate }}"
+      formControlName="autocompleteInput"  cdkFocusInitial #addressText>
+    
+  </mat-form-field>
+
+<!--
+  USAGE:
+      <GoogleAutoAddress (setAddress)="getAddress($event)" addressType="geocode"></GoogleAutoAddress>
+      addressType: Set to "geocode" for residential. Set to "establishment" for business
+
+      Then in the ts file on host:
+
+
+  getAddress($event) {
+    var [street, city, stateAndZip, ...rest] = $event.formatted_address.split(",");
+    var [empty, state, zip] = stateAndZip.split(" ");
+    this.form.get('physicalAddress1').setValue(street);
+    this.form.get('mailingAddress1').setValue(street);
+    this.form.get('physicalCity').setValue(city);
+    this.form.get('mailingCity').setValue(city);
+    this.phyStateCtrl.setValue(state);
+    this.mailStateCtrl.setValue(state);
+    this.form.get('physicalZip').setValue(zip);
+    this.form.get('mailingZip').setValue(zip);
+    
+  }
+-->

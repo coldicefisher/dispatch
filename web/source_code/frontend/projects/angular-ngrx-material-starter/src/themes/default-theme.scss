@@ -1,0 +1,7 @@
+@use '~@angular/material' as mat;
+
+$bizniz-primary: mat.define-palette(mat.$indigo-palette, 800, 300, 900);
+$bizniz-accent: mat.define-palette(mat.$light-blue-palette);
+$bizniz-warn: mat.define-palette(mat.$pink-palette, 600);
+
+$bizniz-theme: mat.define-light-theme($bizniz-primary, $bizniz-accent, $bizniz-warn);

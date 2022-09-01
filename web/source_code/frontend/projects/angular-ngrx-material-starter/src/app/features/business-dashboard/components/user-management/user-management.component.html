@@ -1,0 +1,176 @@
+<mat-toolbar class="toolbar dashboard-toolbar align-bottom w-100 p-0 ml-0 mr-0">
+  <form [formGroup]="userMgmtToolbar" class="w-100 h-100">
+    <div class="container d-flex align-bottom ms-3">
+      <div class="row align-items-center">
+        <div class="col-2 toolbar-control">
+          <mat-icon class="pointer" (click)="onAddProfile()">person_add</mat-icon>
+        </div>
+        <div class="col-5 toolbar-control">
+          <mat-form-field class=""> 
+            <mat-select formControlName="selectFilter" class="modal-control toolbar-select" (selectionChange)="onFilterChange($event)">
+                <mat-option value="All">All</mat-option>
+                <mat-option value="Employee">Employee</mat-option>
+                <mat-option value="Driver">Driver</mat-option>
+                <mat-option value="Human Resources">Human Resources</mat-option>
+                <mat-option value="Assets">Assets</mat-option>
+                <mat-option value="Dispatching">Dispatching</mat-option>
+                <mat-option value="Administrator">Administrator</mat-option>
+              </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-toolbar>
+
+
+<div class="container-fluid w-100 pt-3">
+  <!-- Status bar -->
+  <div class="row w-100">
+    
+    <div class="container w-100" *ngIf="isLoadingUsers$ | async">
+      <mat-card class="w-100">
+        <mat-card-content class="w-100">
+          <div class="col col-12 w-100">
+            <div class="inline-block w-100">
+              <i>Loading users...&nbsp;&nbsp;&nbsp;&nbsp;</i>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div *ngFor="let pendingUser of pendingAddBusinessUsers$ | async">
+      <mat-card class="w-100">
+        <mat-card-content>
+          <div class="container-fluid d-flex">
+            <div class="row w-100">
+              <div class="col col-12">
+                <div class="inline-block">
+                  <i class="">
+                    Adding {{ pendingUser.firstName }} {{ pendingUser.middleName }} {{ pendingUser.lastName }} {{ pendingUser.suffix }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                  </i>
+                  <mat-progress-spinner mode="indeterminate" diameter="20" class="inline-block">
+                  </mat-progress-spinner>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div *ngFor="let pendingUser of pendingDeleteBusinessUsers$ | async">
+      <mat-card class="w-100">
+        <mat-card-content>
+          <div class="container-fluid d-flex">
+            <div class="row w-100">
+              <div class="col col-12">
+                <div class="inline-block">
+                  <i class="">
+                    Deleting {{ pendingUser.firstName }} {{ pendingUser.middleName }} {{ pendingUser.lastName }} {{ pendingUser.suffix }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                  </i>
+                  <mat-progress-spinner mode="indeterminate" diameter="20" class="inline-block">
+                  </mat-progress-spinner>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <!-- USERS LIST -->
+  <div class="row w-100">
+    
+  <ng-container *ngFor="let user of businessUsers$ | async">
+    <div class="col-12 col-md-6 col-lg-4 col-x-lg-3">
+      <mat-card class="user-card" [@inOutAnimation]>
+        <mat-card-title class="user-name">
+          <!--<img mat-card-image href="{{ user.profilePicture }}">-->
+          <div class="row">
+            <div class="col-4">
+              <div class="row">
+                <div class="col-12 user-picture">
+                  <div class="user-image">
+                  <img alt src="{{ user.profilePicture }}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-8">
+              <h4>{{ user.firstName }} {{ user.middleName }} {{ user.lastName }} {{ user.suffix }}</h4>
+            </div>
+          </div>
+        </mat-card-title>
+        <hr>
+        
+        <mat-card-content>
+        
+          <div class="row"> 
+            <div class="col-4">
+              <label>Permissions:&nbsp;</label>
+              <div *ngIf="user.pending">
+                <label><i>Updating...</i></label>
+                <mat-progress-spinner mode="indeterminate" diameter="25">
+                </mat-progress-spinner>
+              </div>
+            </div>
+              
+              <div class="col-8 align-right">
+                <ng-container *ngIf="(user.permissions.length) === 0">
+                  <span class="inline-span pointer" (click)="onProfileClick(user.profileId, user.hasLogin, user.deleted)">
+                    None
+                  </span>
+                </ng-container>
+                <ng-container *ngFor="let permission of user.permissions">
+                  <span class="inline-span pointer" (click)="onProfileClick(user.profileId, user.hasLogin, user.deleted)">
+                    {{ permission }}
+                  </span>
+                </ng-container>
+              </div>
+            
+          </div>
+          
+          
+          <div class="row">
+            <div class="col-4">
+              <label>Enrolled:</label>
+            </div>
+            <div class="col-8 align-right">
+              <span>{{ user.hasLogin ? 'Yes' : 'No' }}</span>
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-4">
+              <label>Deleted:</label>
+            </div>
+            <div class="col-8 align-right">
+              <span>{{ user.deleted ? 'Yes' : 'No' }}</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-6">
+              <label>Enrollment Email:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-6">
+              <span>{{ user.associationEmail }}</span>
+            </div>
+          </div>
+
+          <div class="row w-100">
+            <div class="col align-right text-danger">
+              <mat-icon class="pointer" (click)="onDeleteProfileClick(user.profileId, user.firstName, user.middleName, user.lastName, user.suffix)">delete</mat-icon>
+            </div>
+          </div>
+        </mat-card-content>
+      
+      </mat-card>
+    </div>
+
+  </ng-container>
+<!-- END USERS LIST -->

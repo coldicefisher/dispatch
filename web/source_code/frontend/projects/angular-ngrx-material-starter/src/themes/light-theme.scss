@@ -1,0 +1,16 @@
+@use '~@angular/material' as mat;
+
+// $bizniz-light-primary: mat.define-palette(mat.$grey-palette, 200, 500, 300);
+// $bizniz-light-accent: mat.define-palette(mat.$brown-palette, 200);
+// $bizniz-light-warn: mat.define-palette(mat.$deep-orange-palette, 200);
+
+$bizniz-light-primary: mat.define-palette(mat.$grey-palette, 900, 500, 500);
+// $bizniz-light-accent: mat.define-palette(mat.$orange-palette, 100);
+$bizniz-light-accent: mat.define-palette(mat.$blue-palette, 500);
+$bizniz-light-warn: mat.define-palette(mat.$red-palette, 700);
+
+$bizniz-light-theme: mat.define-light-theme(
+  $bizniz-light-primary,
+  $bizniz-light-accent,
+  $bizniz-light-warn
+);

@@ -1,0 +1,11 @@
+@use '~@angular/material' as mat;
+
+$bizniz-black-primary: mat.define-palette(mat.$grey-palette, 700, 300, 900);
+$bizniz-black-accent: mat.define-palette(mat.$blue-palette, 500);
+$bizniz-black-warn: mat.define-palette(mat.$red-palette, 700);
+
+$bizniz-black-theme: mat.define-dark-theme(
+  $bizniz-black-primary,
+  $bizniz-black-accent,
+  $bizniz-black-warn
+);

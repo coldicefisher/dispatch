@@ -1,0 +1,51 @@
+
+  <!--<div class="row justify-content-center">-->
+    <form [formGroup]="form" (ngSubmit)="onCheck()">
+      <mat-card>
+        <mat-card-title>{{ 'custom.auth.otp-verify.title' | translate }}</mat-card-title>
+        
+        <div class="row">
+          <mat-form-field class="col">
+            <input matInput placeholder="{{ 'custom.auth.otp-verify.otpCode-label' | translate }}"
+              formControlName="otpCode">
+            <mat-error *ngIf="form.get('otpCode')?.hasError('required')">
+              
+              {{ 'custom.auth.otp-verify.error1' | translate }}
+            </mat-error>
+            
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <div class="col">
+          <!--<mat-form-field class="col" [ngClass]="routeAnimationsElements">-->
+            <mat-checkbox class="" formControlName="trustThis">
+              {{ 'custom.auth.otp-verify.trustThis-label' | translate }}
+            </mat-checkbox>
+          <!--</mat-form-field>-->
+          </div>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col">
+            <button mat-raised-button color="primary" class="btn-normal" [disabled]="form.invalid">
+              {{ 'custom.submit' | translate }}
+            </button>
+          </div>
+        </div>
+        <!--
+        <hr />
+        <div class="row">
+          <p>{{ infoMessage }}</p>
+        </div>
+        <div class="row justify-content-end">
+          <button mat-raised-button color="primary" class="btn-wide" [ngClass]="routeAnimationsElements" type="button" (click)="onAdd()">
+            {{ 'custom.add-address' | translate }}
+          </button>
+        </div>
+        
+      -->
+      </mat-card>
+   
+    </form>
+  <!--
+  </div>
+-->

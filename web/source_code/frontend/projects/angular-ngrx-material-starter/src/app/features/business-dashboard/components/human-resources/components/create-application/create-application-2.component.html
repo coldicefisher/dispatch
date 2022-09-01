@@ -1,0 +1,131 @@
+
+<div class="row">
+  <div class="col align-right pointer">
+    <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+  </div>
+</div>
+
+<form [formGroup]="demographics">
+  <h3>{{ 'custom.create-application.demographics-title' | translate }}</h3>
+
+  <div class="row align-items-center">
+    <div class="col col-12 col-sm-6 height-100">
+      <mat-form-field appearance="fill" class="modal-control">
+        <input matInput placeholder="{{ 'custom.create-application.field-name-label' | translate }}"
+          formControlName="fieldNameCtrl">
+        <mat-error *ngIf="demographics.get('fieldNameCtrl').hasError('required')">
+          {{ 'custom.create-application.field-name-error' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div class=" col col-11 col-sm-5 height-100">
+      <mat-form-field class="width-100">
+        <mat-label>Field Type</mat-label>
+        <mat-select formControlName="fieldTypeCtrl" class="modal-control w-100" appearance="fill" required>
+            <mat-option value="Text">Text</mat-option>
+            <mat-option value="Select">Select</mat-option>
+            <mat-option value="Date">Date</mat-option>
+            <mat-option value="Phone">Phone</mat-option>
+            <mat-option value="SSN">SSN</mat-option>
+            <mat-option value="Email">Email</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col col-1 ">
+      <mat-icon class="text-success pointer" (click)="onAddFieldClick()">add</mat-icon>
+    </div>
+    
+    
+  </div>
+
+  
+  <h3>{{ 'custom.create-application.fields-title' | translate }}</h3>
+  
+  <div class="container-fluid bizniz-table">
+    <!-- Header -->
+    <div class="row bizniz-table-header align-items-end">
+      <div class="col col-2">
+        <span>{{ 'custom.create-application.fields.name-header' | translate }}</span>
+      </div>
+      <div class="col col-2">
+        <span>{{ 'custom.create-application.fields.type-header' | translate }}</span>
+      </div>
+      <div class="col col-3"></div>
+      <div class="col col-5">
+        <span>{{ 'custom.create-application.fields.values-header' | translate }}</span>
+      </div>
+    </div>
+
+    <!-- End Header Begin Content -->
+    <div class="row" *ngFor="let field of demographicsFields$ | async; let i = index">
+      <div class="col col-11 col-sm-2">
+        <span>{{ field.fieldName }}</span>
+      </div>
+      <div class="col col-1">
+        <mat-icon class="pointer text-danger" (click)="onRemoveFieldClick(field.fieldName)">remove</mat-icon>
+      </div>
+      
+      <div class="col col-12 col-sm-1">
+        <span>{{ field.fieldType }}</span>
+      </div>
+      
+      <ng-container *ngIf="field.fieldType == 'Select'">
+        <div class="col col-11 col-sm-2">
+          <mat-form-field appearance="fill" class="modal-control">
+            <input matInput placeholder="{{ 'custom.create-application.field-value-label' | translate }}"
+              id="fieldValue_{{i}}" name="fieldValue_{{i}}">
+          </mat-form-field>
+        </div>
+        
+        <div class="col col-1">
+          <mat-icon class="text-success pointer" (click)="onAddFieldValueClick(field.fieldName, 'fieldValue_'+i)">add</mat-icon>
+        </div>
+        
+        <div class="col col-12 col-sm-5">
+          <ng-container *ngFor="let fieldValue of field.fieldValues">
+              <span class="inline-span pointer align-items-center h-100" (click)="onRemoveFieldValueClick(field.fieldName, fieldValue)">
+                {{ fieldValue }}
+                <mat-icon class="pointer text-danger">remove</mat-icon>
+              </span>
+            
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="row modal-row-single">
+      <div class="col-12">
+        <mat-form-field appearance="fill" class="modal-control">
+          <mat-label>{{ 'custom.create-application.demographics-disclaimer-label' | translate }}</mat-label>
+          <textarea matInput placeholder=""
+            formControlName="demographicsDisclaimerCtrl" class="textarea-paragraph"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<div class="row">
+  <div class="col col-12 col-md-4">
+    <button mat-stroked-button color="primary" class="btn-main"
+            type="button" (click)="onContinueClick()">
+      Continue
+    </button>
+  </div>
+
+</div>
+
+<div class="row" >
+<div class="col">
+  <button mat-button class="btn-normal" type="button" (click)="onPreviousClick()">
+    Previous
+  </button>
+
+  <button mat-button class="btn-normal" type="button" 
+        (click)="onResetClick()">
+    Cancel
+  </button>
+</div>
+</div>

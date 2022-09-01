@@ -1,0 +1,94 @@
+<input [(ngModel)]="name" #ctrl="ngModel" required (ngModelChange)="nameChanged($event)">
+<!--
+<p>This is a test of printable functionality</p>
+  <div class="row">
+    <div class="col">
+      <div>
+        <bizniz-terms-and-conditions></bizniz-terms-and-conditions>
+      </div>      
+      <bizniz-signature
+          [disabled]="false"
+          profileId="3975557a-cfec-4267-a60f-76a8ca1ffc0b"
+          templateName="bizniz.business_disclaimer_1"
+          fullName="Jamey Charles Harris"
+          [showBranding]="true"
+          [allowDuplicates]="false"
+        >
+      </bizniz-signature>
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>This is a regular page. It will contain the signature component and then a component nested inside it.
+        All of the signature functionality will be in the signing component. The agreements will be inserted using this and 
+        other my own text.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field appearance="fill">
+        <mat-label>Disable</mat-label>
+        <mat-select #disableSignature value="true">
+          <mat-option value="true">Disabled</mat-option>
+          <mat-option value="false">Enabled</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+-->
+
+<br><br><br>
+<hr>
+<br><br><br>
+
+  <button mat-raised-button (click)="onTest()">Click</button>
+
+<!--  
+  <div>
+
+  
+    <div class="container">
+      <form [formGroup]="form">
+        
+        <div class="row" >
+          <div class="col">
+            <mat-form-field class="modal-control" >
+              <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.create-business.name-label' | translate }}"
+                      formControlName="nameCtrl" 
+                      (blur)="checkName()"
+                      cdkFocusInitial>
+              <mat-error *ngIf="form.get('nameCtrl')?.hasError('required')">
+                {{ 'custom.user.profile.create-business.name-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <ng-container *ngIf="nameValid$ | async; then invalidName">
+            </ng-container>
+            <ng-template #invalidName>
+              <label class="form-element text-danger">
+                <i class="material-icons">{{ (nameValid$ | async)  ? 'cancel' :
+                  'check_circle' }}</i>
+                  {{ 'custom.user.profile.create-business.name-exists-error' | translate }}
+              </label>
+            </ng-template>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+  
+  </div>
+-->
+  <CheckBusinessName (setBusinessNameExists)="getBusinessNameExists($event)"></CheckBusinessName>
+  <CheckEmail (setEmail)="getEmail($event)"></CheckEmail>
+  <!--<CheckUsername (setUsername)="getUsername($event)"><CheckUsername>-->
+    <!--<GoogleAutoAddress (setAddress)="getAddress($event)" addressType="geocode"></GoogleAutoAddress>-->
+
+
+

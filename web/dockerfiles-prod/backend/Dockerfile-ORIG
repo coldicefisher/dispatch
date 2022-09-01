@@ -1,0 +1,62 @@
+#https://github.com/sameersbn/docker-postgresql
+#This is where I found the means to build this beautiful Ubuntu postgres server
+
+FROM ubuntu:focal-20201008 AS add-apt-repositories
+RUN apt-get update && apt-get autoremove && apt-get autoclean
+
+# Get additional repositories for Ubuntu
+RUN apt install apt-transport-https ca-certificates curl software-properties-common -y
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+RUN apt-get update
+
+#Install libraries
+RUN apt-get install apt-utils -y \
+    libffi-dev \
+    libssl-dev \
+    libmysqlclient-dev \
+    libxml2-dev \
+    libxslt-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    zlib1g-dev \
+    net-tools \
+    nano \
+    python3.7 -y \
+    python3-pip -y \
+    libpq-dev \
+    iputils-ping -y \
+    curl -y \               
+    wget -y \               
+    software-properties-common -y
+
+# Create a custom directory for working with installation properties
+RUN mkdir /custom && pip3 install --upgrade pip
+WORKDIR /custom
+
+# Install python libraries using the requirements file
+COPY requirements-backend.txt /custom/
+RUN pip3 install -r requirements-backend.txt
+COPY . /custom/
+
+# MEDIUM -  Project Files and Settings
+# Set the project folder. Include that directory in python paths for inluding classes
+
+ARG PROJECT=backend
+ENV PROJECT_DIR=/var/www/${PROJECT}
+RUN mkdir -p ${PROJECT_DIR}
+WORKDIR ${PROJECT_DIR}
+# IMPORTANT!!! ADDS THE PROJECT TO PYTHONPATH !!!!
+ENV PYTHONPATH "${PYTHONPATH}:${PROJECT_DIR}"
+
+# I Dont know what this is for
+STOPSIGNAL SIGINT
+
+
+#RUN apt update && apt-get update
+
+# Run the entrypoint script
+COPY entrypoint-backend.sh /sbin/entrypoint-backend.sh
+RUN chmod 755 /sbin/entrypoint-backend.sh
+

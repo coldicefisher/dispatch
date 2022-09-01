@@ -1,0 +1,33 @@
+
+  
+  <form [formGroup]="form">
+    <div class="container">
+      <mat-card>
+        <mat-card-title>{{ 'custom.auth.add-address.title' | translate }}</mat-card-title>
+        
+          <div class="row">
+            <mat-form-field class="col" [ngClass]="routeAnimationsElements">
+              <input matInput placeholder="{{ 'custom.auth.add-address.address-label' | translate }}"
+                formControlName="address">
+            </mat-form-field>
+          </div>
+          
+          <label class="row form-element" [ngClass]="form.get('address').hasError('required') || form.get('address').hasError('validAddress')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">{{ form.get('address').hasError('required') ||
+              form.get('address').hasError('validAddress') ? 'cancel' :
+              'check_circle' }}</i>
+            {{ 'custom.auth.error-address' | translate }}
+          </label>
+                
+          <div class="row justify-content-end">
+            <div class="col">
+              <button mat-raised-button color="primary" class="btn-wide" [ngClass]="routeAnimationsElements" 
+                [disabled]="form.invalid" type="button" (click)="onAddAddress()">
+                {{ 'custom.auth.add-address.address-button' | translate }}
+              </button>
+            </div>
+          </div>
+        
+      </mat-card>
+    </div>
+  </form>

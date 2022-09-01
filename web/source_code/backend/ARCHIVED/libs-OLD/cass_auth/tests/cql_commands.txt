@@ -1,0 +1,4 @@
+LOGIN:                      cqlsh -u popcornhashlaurel -p Iam#38@Crypto
+LIST KEYSPACES:             DESCRIBE keyspaces;             
+SELECT KEYSPACE:            USE keyspace;               USE anms_users;
+LIST TABLES:                DESCRIBE tables;

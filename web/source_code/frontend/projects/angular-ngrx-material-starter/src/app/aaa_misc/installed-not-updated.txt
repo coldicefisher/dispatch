@@ -1,0 +1,4 @@
+pdfmake
+jspdf
+html-to-pdfmake
+subtle-crypto

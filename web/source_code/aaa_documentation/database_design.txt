@@ -1,0 +1,51 @@
+table: users_by_email
+
+CREATE TABLE dispatch_users.users_by_email (
+    email text PRIMARY KEY,
+    status boolean,
+    first_name text,
+    last_name text,
+    otp int,
+    pwd text,
+    uid uuid,
+    alternate_emails map<text, text>,
+    phone_numbers map<text, text>,
+    trusted_devices list<text>
+)
+
+CREATE TABLE dispatch_users.users_by_email (
+    email text PRIMARY KEY,
+    first_name text,
+    last_name text,
+    otp int,
+    pwd text,
+    status text,
+    uid uuid,
+    alternate_emails map<text, text>,
+    phone_numbers map<text, text>,
+    trusted_devices list<text>
+)
+CREATE TABLE dispatch_users.otp_validations (
+    address text,
+    uid uuid,
+    otp int,
+    type int,
+    verified boolean,
+    PRIMARY KEY (address, uid)
+) WITH CLUSTERING ORDER BY (uid ASC)
+
+
+why: This table is used to store the source by source alias so that we can retrieve the carrier
+
+
+
+/////////////////////////////////////////////////////
+!! Maps !! //////////////////////////////////////////:
+CREATE MAP:
+create table test_maps (uid uuid, testField map<text, text>, PRIMARY KEY (uid));
+
+INSERT:
+insert into test_maps (id, testField) VALUES (1, {'4234042162': 'unvalidated'});
+
+UPDATE:
+update test_maps set testField = {'4234042162': 'validated'} where id = 1;

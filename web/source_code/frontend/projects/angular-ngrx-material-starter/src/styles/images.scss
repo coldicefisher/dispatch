@@ -1,0 +1,52 @@
+
+.circular-image-container {
+  min-height: 230px;
+  min-width: 230px;
+  position: relative;
+}
+
+.circular-image { 
+  width: 180px;
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+} 
+.circular-image img { 
+  display: relative;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;    
+}
+.circular-image-text {
+  position: relative;
+  text-align: center;
+  vertical-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+
+.user-image-container {
+  min-height: 50px;
+  min-width: 50px;
+  //position: relative;
+}
+
+.user-image { 
+  width: 60px;
+  height: 60px;
+  //position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+} 
+
+.user-image img { 
+  //display: relative;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;    
+}
+.user-image-text {
+  font-size: 12px;
+}

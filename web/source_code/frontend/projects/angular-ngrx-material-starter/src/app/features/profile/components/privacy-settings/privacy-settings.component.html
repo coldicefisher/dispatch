@@ -1,0 +1,46 @@
+<!--
+<mat-card>
+-->
+  <div class="container">
+    <!--
+    <mat-card-title>
+      <h3>{{ 'custom.user.profile.security.title' | translate }}</h3>
+    </mat-card-title>
+  </div>    
+  
+  <mat-card-content>
+  -->
+    <div class="">
+      <form [formGroup]="form" submit="onUpdate()">        
+        <div *ngIf="profile$ | async; let profile">
+          <div class="row">
+            <div class="col-6">
+              <span class="primary-text">Who can see you:</span>
+            </div>
+            <div class="col-6">
+              <span class="primary-text pointer" 
+                    (click)="openUpdatePrivacySettingsDialog('privacyStatus', profile.privacyStatus)">
+                {{ profile.privacyStatus }}
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <span class="primary-text">Seeking employment offers:</span>
+            </div>
+            <div class="col-6">
+              <div class="col-6 col-sm-12">
+                <span class="primary-text pointer"  
+                      (click)="openUpdatePrivacySettingsDialog('seekingStatus', profile.seekingStatus)">
+                  {{ profile.seekingStatus }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+<!--  
+  </mat-card-content>
+</mat-card>
+-->

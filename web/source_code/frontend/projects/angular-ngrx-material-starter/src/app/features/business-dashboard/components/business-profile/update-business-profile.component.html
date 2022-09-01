@@ -1,0 +1,45 @@
+<div mat-dialog-content class="modal-dialog-no-scroll">
+
+  <form [formGroup]="form">
+    <div class="row w-100">
+      <div class="col align-right pointer">
+        <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+      </div>
+    </div>
+
+      <h1 mat-dialog-title>Update Information</h1>
+
+      <div [ngSwitch]="data.fieldName">
+          
+
+        <div *ngSwitchCase="'about'">
+          <mat-form-field class="modal-control" appearance="fill">
+              <textarea matInput formControlName="newValue" placeholder="{{ data.fieldValue }}" class="text-paragraph">
+              </textarea>
+          </mat-form-field>
+
+          <div mat-dialog-actions>
+            <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+            <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+          </div>
+  
+        </div>
+
+          <!-- Default Controls-->
+        <div *ngSwitchDefault> 
+
+          <mat-form-field appearance="fill" class="modal-control">
+              <input matInput formControlName="newValue" placeholder="{{ data.fieldValue }}">
+          </mat-form-field>
+
+          <div mat-dialog-actions>
+              <button mat-raised-button color="primary" class="btn-normal" (click)="onUpdate()">Update</button>
+              <button mat-button  class="btn-normal" cdkFocusInitial (click)="onNoClick()">Cancel</button>
+          </div>
+    
+        </div>
+
+      </div>
+  </form>
+  
+</div>

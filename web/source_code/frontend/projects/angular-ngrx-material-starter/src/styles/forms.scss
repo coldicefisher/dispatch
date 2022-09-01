@@ -1,0 +1,44 @@
+.main-form-container {
+  max-width: 900px !important;
+  
+}
+.main-form-container input {
+  max-width: 700px !important;
+}
+.main-form-container .col {
+  margin-top: 20px !important;
+}
+
+.form-article-container {
+  max-width: 900px !important;
+  
+}
+.form-article-container .article-content {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.form-article-container h1, h2, h3 {
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+.form-article-container p {
+  text-align: justify;
+}
+.form-article-container ol {
+  list-style: upper-latin;
+  padding-bottom: 20px;
+}
+.form-article-container ul {
+  list-style: disc;
+  padding-bottom: 20px;
+}
+.form-article-container .col {
+  margin-top: 20px;
+}
+
+
+.no-padding {
+  padding-right: 0px;
+  padding-left: 0px;
+}

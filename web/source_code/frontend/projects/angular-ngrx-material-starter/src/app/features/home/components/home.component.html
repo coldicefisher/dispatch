@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row d-none d-lg-block row-padding">
+  </div>
+
+  <div class="row" *ngIf="isHomeLoading$ | async">
+    <mat-card class="w-100">
+      <mat-card-content class="w-100">
+        <div class="col col-12 w-100">
+          <div class="inline-block w-100 align-center">
+            <i>Loading...&nbsp;&nbsp;&nbsp;&nbsp;</i>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <div class="row w-100 p-0 mr-0 ml-0">
+    <div class="col col-lg-3 d-none d-lg-block mr-0 ml-0 p-0">
+      <LeftHomePanel></LeftHomePanel>
+      
+    </div>
+
+    <div class="col col-12 col-lg-6 mr-0 ml-0 p-0">
+      <MiddleHomePanel></MiddleHomePanel>
+    </div>
+
+    <div class="col col-lg-3 d-none d-lg-block mr-0 ml-0 p-0">
+      <RightHomePanel></RightHomePanel>
+    </div>
+  </div>
+</div>

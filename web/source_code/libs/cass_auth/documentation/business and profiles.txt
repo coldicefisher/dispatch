@@ -1,0 +1,5 @@
+business -> Business
+
+The Business object maps out the actual business. The business_profile -> BusinessProfile maps out the profile users of each business.
+
+The Profile object has businesses. All adding of profiles are done on the Business object.

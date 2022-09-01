@@ -1,0 +1,200 @@
+
+
+  <form [formGroup]="form" (ngSubmit)="onSignUp()">
+    <mat-card>
+      <mat-card-title>{{ 'custom.auth.sign-up.title' | translate }}</mat-card-title>
+
+      <div class="row">
+        <mat-form-field class="col">
+          <input matInput placeholder="{{ 'custom.auth.sign-up.firstname-label' | translate }}"
+            formControlName="firstname" type="firstname">
+          <mat-error *ngIf="form.get('firstname')?.hasError('required')">
+            {{ 'custom.auth.sign-up.error-firstname' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      
+      <div class="row">
+        <mat-form-field class="col">
+          <input matInput placeholder="{{ 'custom.auth.sign-up.lastname-label' | translate }}"
+            formControlName="lastname" type="lastname">
+          <mat-error *ngIf="form.get('lastname')?.hasError('required')">
+            {{ 'custom.auth.sign-up.error-lastname' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <!--
+        <mat-form-field class="col">
+          
+          <input matInput placeholder="{{ 'custom.auth.sign-up.email-label' | translate }}"
+            formControlName="email" type="email" email="true">
+        </mat-form-field>
+      
+        <label class="row form-element" [ngClass]="form.get('email').hasError('required') || form.get('email').hasError('validEmail')  ? 'text-danger' : 'text-success'">
+          <i class="material-icons">{{ form.get('email').hasError('required') ||
+            form.get('email').hasError('validEmail') ? 'cancel' :
+            'check_circle' }}</i>
+          {{ 'custom.auth.sign-up.error-email' | translate }}
+        </label>
+      -->
+        <div class="col">
+          <CheckEmail (setEmail)="getEmail($event)"></CheckEmail>
+        </div>  
+      </div>
+      
+      <div class="row">
+        <mat-form-field class="col">
+          <input matInput placeholder="{{ 'custom.auth.sign-up.phone-label' | translate }}"
+            formControlName="phone" type="phone">
+        </mat-form-field>
+      
+          <label class="row form-element" [ngClass]="form.get('phone').hasError('required') || form.get('phone').hasError('validPhone')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">{{ form.get('phone').hasError('required') ||
+              form.get('phone').hasError('validPhone') ? 'cancel' :
+              'check_circle' }}</i>
+            {{ 'custom.auth.sign-up.error-phone' | translate }}
+          </label>
+          
+
+      </div>
+      
+      <div class="row">
+        <mat-form-field class="col">
+          <input matInput placeholder="{{ 'custom.auth.sign-up.username-label' | translate }}"
+            formControlName="username" type="username" username="true">
+            <mat-error>
+            {{ 'custom.auth.sign-up.error-username' | translate }}
+            </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!--
+        PASSWORD ////////////////////////////////////////////////////////////////
+      -->
+      
+      <label class="row form-element" [ngClass]="form.get('pwd').hasError('required') || form.get('pwd').hasError('minlength')  ? 'text-danger' : 'text-success'">
+        <i class="material-icons">{{ form.get('pwd').hasError('required') ||
+          form.get('pwd').hasError('minlength') ? 'cancel' :
+          'check_circle' }}</i>
+        {{ 'custom.auth.sign-up.error-pwd-length' | translate }}
+      </label>
+    
+      <label class="row form-element" [ngClass]="form.get('pwd').hasError('required') || form.get('pwd').hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+        <i class="material-icons">{{ form.get('pwd').hasError('required') ||
+          form.get('pwd').hasError('hasNumber') ? 'cancel' :
+          'check_circle' }}</i>
+        {{ 'custom.auth.sign-up.error-pwd-number' | translate }}
+      </label>
+      
+      <label class="row form-element" [ngClass]="form.get('pwd').hasError('required') || form.get('pwd').hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+        <i class="material-icons">{{ form.get('pwd').hasError('required') ||
+          form.get('pwd').hasError('hasCapitalCase') ? 'cancel' :
+          'check_circle' }}</i>
+        {{ 'custom.auth.sign-up.error-pwd-capital' | translate }}
+      </label>
+
+      <label class="row form-element" [ngClass]="form.get('pwd').hasError('required') || form.get('pwd').hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+        <i class="material-icons">{{ form.get('pwd').hasError('required') ||
+          form.get('pwd').hasError('hasSmallCase') ? 'cancel' :
+          'check_circle' }}</i>
+        {{ 'custom.auth.sign-up.error-pwd-small' | translate }}
+      </label>
+
+      <label class="row form-element" [ngClass]="form.get('pwd').hasError('required') || form.get('pwd').hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+        <i class="material-icons">{{ form.get('pwd').hasError('required') ||
+          form.get('pwd').hasError('hasSpecialCharacters') ? 'cancel' :
+          'check_circle' }}</i>
+        {{ 'custom.auth.sign-up.error-pwd-special' | translate }}
+      </label>
+    
+      <div class="row">
+        <mat-form-field class="row">
+          <input matInput placeholder="{{ 'custom.auth.sign-up.pwd-label' | translate }}"
+            formControlName="pwd" type="password" autocomplete="new-password">
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="col">
+          <input matInput placeholder="{{ 'custom.auth.sign-up.pwd-confirm-label' | translate }}"
+            formControlName="pwdConfirm" type="password">
+          <mat-error>
+            {{ 'custom.auth.sign-up.error-pwd-confirm' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!--
+        END PASSWORD ////////////////////////////////////////////////////////////
+      -->
+
+
+      <!--
+        QUESTIONS ///////////////////////////////////////////////////////////////
+      -->
+      <div class="row">
+        <mat-form-field class="col">
+          <input matInput placeholder="{{ 'custom.auth.sign-up.q1-label' | translate }}"
+            formControlName="q1">
+            <mat-error>
+              {{ 'custom.auth.sign-up.q1-error-required' | translate }}
+            </mat-error>
+        </mat-form-field>
+      </div>
+    
+      <div class="row">
+        <mat-form-field class="col">
+          <input matInput placeholder="{{ 'custom.auth.sign-up.a1-label' | translate }}"
+            formControlName="a1">
+            <mat-error>
+              {{ 'custom.auth.sign-up.a1-error-required' | translate }}
+            </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="col">
+          <input matInput placeholder="{{ 'custom.auth.sign-up.q2-label' | translate }}"
+            formControlName="q2">
+            <mat-error>
+              {{ 'custom.auth.sign-up.q2-error-required' | translate }}
+            </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="col">
+          <input matInput placeholder="{{ 'custom.auth.sign-up.a2-label' | translate }}"
+            formControlName="a2">
+            <mat-error>
+              {{ 'custom.auth.sign-up.a2-error-required' | translate }}
+            </mat-error>
+        </mat-form-field>
+      </div>
+    
+    
+    <!--
+        END QUESTIONS ///////////////////////////////////////////////////////////
+      -->
+      <!-- TERMS AND CONDITIONS -->
+      <div class="row">
+        <div class="col">
+          <mat-checkbox formControlName="terms">
+            I HAVE READ AND AGREE TO BIZNIZ.IO'S <a href="terms" class="link-normal">TERMS AND CONDITIONS</a> AND <a href="privacy-policy" class="link-normal">PRIVACY POLICY</a>
+          </mat-checkbox>
+        </div>
+      </div>
+      <!-- END TERMS AND CONDITIONS -->
+
+      <div class="row justify-content-end">
+        <div class="col">
+          <button mat-raised-button color="primary" class="btn-normal" [disabled]="form.invalid || (emailExists) || (emailWrongFormat) || (emailMissing)">
+            {{ 'custom.auth.sign-up.register' | translate }}
+          </button>
+        </div>
+      </div>
+
+    </mat-card>
+  </form>

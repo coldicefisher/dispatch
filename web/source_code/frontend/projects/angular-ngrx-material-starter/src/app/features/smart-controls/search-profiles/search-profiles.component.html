@@ -1,0 +1,38 @@
+<div class="container">
+  
+    <div class="row modal-row-single">
+      <div class="col">
+        <mat-form-field class="modal-control">
+          <input matInput placeholder="Search" aria-label="State" [matAutocomplete]="auto" [formControl]="searchCtrl">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngIf="isLoading$ | async" class="option-search">Loading...</mat-option>
+            <div *ngFor="let profile of filteredProfiles | async">
+              <mat-option class="option-search" [value]="profile">
+                <div *ngIf="(isLoading$ | async) === false">
+                  <img style="vertical-align:middle;" aria-hidden src="{{profile.profilePicture}}" class="search-image pr-5" />
+                  <span class="search-option-name">{{profile.fullName}}</span>
+                </div>
+                    
+              </mat-option>
+            </div>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+    
+  </div>
+
+  <!--
+  USAGE:
+      <SearchProfiles 
+          (setProfile)="getProfile($event)" 
+          searchType="profile"
+          [filterIds]="['865d9b7d-7816-4020-b8c6-c88e8b3305d6', 'dork']"
+      ></SearchProfiles>
+      searchType: Set to "profile" for all profiles. Set to "businessProfile" for business profiles.
+      filterIds: Pass a filter for ids to exclude
+
+      
+
+-->
+  

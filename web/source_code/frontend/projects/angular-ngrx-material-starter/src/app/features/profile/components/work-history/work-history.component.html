@@ -1,0 +1,220 @@
+<!--
+<div class="row justify-content-center">
+    <div class="col col-sm-10 col-md-8 col-lg-6">
+-->
+
+      <form [formGroup]="form">
+        <div class="container">
+          <div class="btn-main">
+            <button mat-raised-button color="primary" type="button" (click)="openInsertWorkHistoryDialog()" class="btn-wide">
+              Add Work History
+            </button>
+          </div>
+    
+          <div *ngFor="let workHistory of sortedWorkHistories$ | async">
+            <mat-card class="mat-card">
+              <mat-card-title *ngIf="workHistory.item.businessName; else coBlank" class="pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'businessName', workHistory.item.businessName)">
+                {{ workHistory.item.businessName }}
+              </mat-card-title>
+              <ng-template #coBlank>
+                <mat-card-title class="pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'businessName', workHistory.item.businessName)">
+                  Add Business Name
+                </mat-card-title>
+              </ng-template>
+              
+              <hr>
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-lg-6 col-sm-12 col-md-6">
+                    
+                    <div class="row">
+                      <div class="col-12">
+                        <h4><strong>Physical Address:</strong></h4>
+                        <div class="pointer" *ngIf="workHistory.item.physicalAddress1; else phyAdd1Blank" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'physicalAddress1', workHistory.item.physicalAddress1)">{{ workHistory.item.physicalAddress1 }}<br></div>
+                        <ng-template #phyAdd1Blank>
+                          <div class="pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'physicalAddress1', workHistory.item.physicalAddress1)">Enter Address Line 1<br></div>
+                        </ng-template>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="pointer" *ngIf="workHistory.item.physicalAddress2; else phyAdd2Blank" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'physicalAddress2', workHistory.item.physicalAddress2)">{{ workHistory.item.physicalAddress2 }}</div>
+                        <ng-template #phyAdd2Blank>
+                          <div class="pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'physicalAddress2', workHistory.item.physicalAddress2)">Enter Address Line 2</div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="no-gutters p-div pointer" *ngIf="workHistory.item.physicalCity; else phyCityBlank" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'physicalCity', workHistory.item.physicalCity)">{{ workHistory.item.physicalCity }},&nbsp;</div>
+                        <ng-template #phyCityBlank>
+                          <div class="no-gutters p-div pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'physicalCity', workHistory.item.physicalCity)">Enter City,&nbsp;</div>
+                        </ng-template> 
+                      
+                        <div class="no-gutters p-div pointer" *ngIf="workHistory.item.physicalState; else phyStateBlank" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'physicalState', workHistory.item.physicalState)">{{ workHistory.item.physicalState }}&nbsp;</div>
+                        <ng-template #phyStateBlank>
+                          <div class="no-gutters p-div pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'physicalState', workHistory.item.physicalState)">Select State&nbsp;</div>
+                        </ng-template>
+                      
+                        <div class="no-gutters p-div pointer" *ngIf="workHistory.item.physicalZip; else phyZipBlank" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'physicalZip', workHistory.item.physicalZip)">{{ workHistory.item.physicalZip }}</div>
+                        <ng-template #phyZipBlank>
+                          <div class="no-gutters p-div pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'physicalZip', workHistory.item.physicalZip)">Enter Zip Code</div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  
+                  </div> <!-- END PHYSICAL CONTAINER -->
+              
+                
+                  <div class="col-lg-6 col-sm-12 col-md-6"> <!-- MAILING CONTAINER -->
+                    
+                    <div class="row">
+                      <div class="col-12">
+                        <h4><strong>Mailing Address:</strong></h4>
+                        <div class="no-gutters p-div pointer" *ngIf="workHistory.item.mailingAddress1; else mailAdd1Blank" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'mailingAddress1', workHistory.item.mailingAddress1)">{{ workHistory.item.mailingAddress1 }}</div>
+                        <ng-template #mailAdd1Blank>
+                          <div class="no-gutters p-div pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'mailingAddress1', workHistory.item.mailingAddress1)">Enter Address Line 1</div>
+                        </ng-template>
+                      </div>
+                    </div>
+    
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="no-gutters p-div pointer" *ngIf="workHistory.item.mailingAddress2; else mailAdd2Blank" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'mailingAddress2', workHistory.item.mailingAddress2)">{{ workHistory.item.mailingAddress2 }}</div>
+                        <ng-template #mailAdd2Blank>
+                          <div class="no-gutters p-div pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'mailingAddress2', workHistory.item.mailingAddress2)">Enter Address Line 2</div>
+                        </ng-template>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="no-gutters p-div pointer" *ngIf="workHistory.item.mailingCity; else mailCityBlank" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'mailingCity', workHistory.item.mailingCity)">{{ workHistory.item.mailingCity }},&nbsp;</div>
+                        <ng-template #mailCityBlank>
+                          <div class="no-gutters p-div pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'mailingCity', workHistory.item.mailingCity)">Enter City,&nbsp;</div>
+                        </ng-template> 
+                      
+                        <div class="no-gutters p-div pointer" *ngIf="workHistory.item.mailingState; else mailStateBlank" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'mailingState', workHistory.item.mailingState)">{{ workHistory.item.mailingState }}&nbsp;</div>
+                        <ng-template #mailStateBlank>
+                          <div class="no-gutters p-div pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'mailingState', workHistory.item.mailingState)">Select State&nbsp;</div>
+                        </ng-template>
+                      
+                        <div class="no-gutters p-div pointer" *ngIf="workHistory.item.mailingZip; else mailZipBlank" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'mailingZip', workHistory.item.mailingZip)">{{ workHistory.item.mailingZip }}</div>
+                        <ng-template #mailZipBlank>
+                          <div class="no-gutters p-div pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'mailingZip', workHistory.item.mailingZip)">Enter Zip Code</div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div> <!-- END MAILING CONTAINER -->
+                
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-lg-6 col-sm-12 pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'startDate', workHistory.item.startDate)">
+                    <strong>Start Date:</strong> {{ workHistory.item.startDate }}
+                  </div>
+                  <div class="col-lg-6 col-sm-12 pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'endDate', workHistory.item.endDate)">
+                    <strong>End Date:</strong> {{ workHistory.item.endDate }}
+                  </div>
+                </div>
+              
+                <br >
+                <hr>
+                
+                <div class="row">
+                  <h4><strong>Positions Held:</strong></h4>
+                  <div *ngIf="workHistory.item.positionsHeld; else posBlank" class="col-lg-6 col-sm-12 pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'positionsHeld', workHistory.item.positionsHeld)">
+                    <p>{{ workHistory.item.positionsHeld}}</p>
+                  </div>
+                  <ng-template #posBlank>
+                    <div class="col-lg-6 col-sm-12 pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'positionsHeld', workHistory.item.positionsHeld)">
+                      <p>Enter the positions you held.</p>
+                    </div>
+                  </ng-template>
+                </div>
+              
+                <div class="row">
+                  <h4><strong>Job Description:</strong></h4> 
+                  <div *ngIf="workHistory.item.description; else descBlank" class="col-lg-6 col-sm-12 pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'description', workHistory.item.description)">
+                    <p class="preserve-format">{{ workHistory.item.description }}</p>
+                  </div>
+                  <ng-template #descBlank>
+                    <div  class="col-lg-6 col-sm-12 pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'description', workHistory.item.description)">
+                      <p>Describe what you did.</p>
+                    </div>
+                  </ng-template>
+                </div>
+                <hr>
+                <br>
+                
+                <div class="row">
+                  <div *ngIf="workHistory.item.supervisor; else supervisorBlank" class="col pointer" class="pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'supervisor', workHistory.item.supervisor)">
+                    <strong>Supervisor:</strong> {{ workHistory.item.supervisor }}
+                  </div>
+                  <ng-template #supervisorBlank>
+                    <div  class="col-lg-6 col-sm-12 pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'supervisor', workHistory.item.supervisor)">
+                      <p>Enter your supervisor or business contact.</p>
+                    </div>
+                  </ng-template>
+                </div>
+                
+                <div class="row">
+                  <div *ngIf="workHistory.item.phoneNumber; else phoneBlank" class="col pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'phoneNumber', workHistory.item.phoneNumber)">
+                    <strong>Phone Number:</strong> {{ workHistory.item.phoneNumber }}
+                  </div>
+                  <ng-template #phoneBlank>
+                    <div class="col-lg-6 col-sm-12 pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'phoneNumber', workHistory.item.phoneNumber)">
+                      <p>Enter phone number</p>
+                    </div>
+                  </ng-template>
+                </div>
+
+                              
+                <div class="row">
+                  <div *ngIf="workHistory.item.email; else emailBlank" class="col pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'email', workHistory.item.email)">
+                    <strong>Email:</strong> {{ workHistory.item.email }}
+                  </div>
+                  <ng-template #emailBlank>
+                    <div class="col-lg-6 col-sm-12 pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'email', workHistory.item.email)">
+                      <p>Enter an email for your supervisor</p>
+                    </div>
+                  </ng-template>
+                </div>
+                
+                <div class="row">
+                  
+                  <div *ngIf="workHistory.item.website; else websiteBlank" class="col pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'website', workHistory.item.website)">
+                    <strong>Website:</strong> {{ workHistory.item.website }}
+                  </div>
+                  <ng-template #websiteBlank>
+                    <div class="col-lg-6 col-sm-12 pointer" (click)="openUpdateWorkHistoryDialog(workHistory.id, 'website', workHistory.item.website)">
+                      <p>Enter the business's website</p>
+                    </div>
+                  </ng-template>
+                </div>
+
+                <div class="row justify-content-right">
+                  <div class="col justify-content-right">
+                    <button mat-raised-button color="primary" class="btn-normal" type="button" (click)="onDeleteWorkHistory(workHistory.id)">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </mat-card-content>
+                <!--  
+                <div mat-dialog-actions>
+                  <button mat-button (click)="onNoClick()">No Thanks</button>
+                  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+                </div>
+              -->
+            </mat-card>
+            
+          </div>
+        </div>       
+      </form>
+  <!--
+    </div>
+  </div>
+-->

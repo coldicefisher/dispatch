@@ -1,0 +1,21 @@
+<mat-toolbar class="toolbar dashboard-toolbar align-bottom w-100 p-0 ml-0 mr-0">
+  <form [formGroup]="hrToolbar" class="w-100 h-100">
+    <div class="container d-flex align-bottom ms-3">
+      <div class="row align-items-center">
+        <div class="col-2 toolbar-control">
+          <mat-icon class="pointer" (click)="onCreatePostingClick()">create_new_folder</mat-icon>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-toolbar>
+<!--
+<div [hidden]="showCreatePosting">
+  <SelectApplication></SelectApplication>
+</div>
+<div [hidden]="showCreateApplication">
+  <CreateApplication></CreateApplication>
+</div>
+-->
+
+<p>Human Resources</p>

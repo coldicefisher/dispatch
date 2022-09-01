@@ -1,0 +1,120 @@
+<!--
+<div class="row justify-content-center">
+    <div class="col col-sm-10 col-md-8 col-lg-6">
+-->
+<form [formGroup]="form">
+
+  <div class="container">
+    <div class="btn-main">
+      <button mat-raised-button color="primary" type="button" (click)="openInsertAddressHistoryDialog()" class="btn-wide">
+        Add Address History
+      </button>
+    </div>
+
+    <div *ngFor="let addressHistory of sortedAddressHistories$ | async">
+      <mat-card class="mat-card">
+        
+        <mat-card-content>
+          <div class="row pointer" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'addressType', addressHistory.item.addressType)">
+            <div class="col">
+              <h3 class="align-left">Type: {{ addressHistory.item.addressType }}</h3>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="pointer" *ngIf="addressHistory.item.address1; else add1Blank" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'address1', addressHistory.item.address1)">
+                {{ addressHistory.item.address1 }}
+              </div>
+              <ng-template #add1Blank>
+                <div class="pointer" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'address1', addressHistory.item.address1)">
+                  Enter Address Line 1
+                  <br>
+                </div>
+              </ng-template>
+              
+            </div>
+          </div>
+              
+          <div class="row">
+            <div class="col-12">
+              <div class="pointer" *ngIf="addressHistory.item.address2; else add2Blank" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'address2', addressHistory.item.address2)">
+                {{ addressHistory.item.address2 }}
+              </div>
+              <ng-template #add2Blank>
+                <div class="pointer" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'address2', addressHistory.item.address2)">
+                  Enter Address Line 2
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        
+          <div class="row">
+            <div class="col-12">
+              <div class="no-gutters p-div pointer" *ngIf="addressHistory.item.city; else cityBlank" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'city', addressHistory.item.city)">
+                {{ addressHistory.item.city }},&nbsp;
+              </div>
+              <ng-template #cityBlank>
+                <div class="no-gutters p-div pointer" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'city', addressHistory.item.city)">
+                  Enter City,&nbsp;
+                </div>
+              </ng-template> 
+            
+              <div class="no-gutters p-div pointer" *ngIf="addressHistory.item.state; else stateBlank" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'state', addressHistory.item.state)">
+                {{ addressHistory.item.state }}&nbsp;
+              </div>
+              <ng-template #stateBlank>
+                <div class="no-gutters p-div pointer" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'state', addressHistory.item.state)">
+                  Select State&nbsp;
+                </div>
+              </ng-template>
+            
+              <div class="no-gutters p-div pointer" *ngIf="addressHistory.item.zip; else zipBlank" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'zip', addressHistory.item.zip)">
+                {{ addressHistory.item.zip }}
+              </div>
+              <ng-template #zipBlank>
+                <div class="no-gutters p-div pointer" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'zip', addressHistory.item.zip)">
+                  Enter Zip Code
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        
+          
+          <hr>
+          <div class="row">
+            <div class="col-lg-6 col-sm-12 pointer" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'startDate', addressHistory.item.startDate)">
+                <strong>Start Date:</strong> {{ addressHistory.item.startDate }}
+            </div>
+            <div class="col-lg-6 col-sm-12 pointer" (click)="openUpdateAddressHistoryDialog(addressHistory.id, 'endDate', addressHistory.item.endDate)">
+              <strong>End Date:</strong> {{ addressHistory.item.endDate }}
+            </div>
+          </div>
+          
+          <br >
+          <hr>
+          
+          
+
+
+          <div class="row justify-content-end">
+            <div class="col">
+              <button mat-raised-button color="primary" class="btn-normal" type="button" (click)="onDeleteAddressHistory(addressHistory.id)">
+                Delete
+              </button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    
+  </div>  
+</form>
+
+<!--  
+          <div mat-dialog-actions>
+            <button mat-button (click)="onNoClick()">No Thanks</button>
+            <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+          </div>
+        -->
+        

@@ -1,0 +1,54 @@
+<mat-toolbar class="toolbar mat-toolbar w-100 p-0 m-0 d-block d-lg-none">
+  <div class="container">
+    <div class="row pt-2">
+      <div *ngIf="isAdministrator$ | async" class="col-2">
+        <span class="pointer d-inline-flex" (click)="onDashboardNavigateClick('user-management')">
+          <mat-icon class="p-0" matTooltip="Manage Users">manage_accounts</mat-icon>
+        </span>
+      </div>
+      <div *ngIf="isDispatching$ | async" class="col-2">
+        <span class="pointer d-inline-flex" (click)="onDashboardNavigateClick('dispatching')">
+          <mat-icon class="p-0" matTooltip="Manage Dispatching">support_agent</mat-icon>
+        </span>
+      </div>
+      <div *ngIf="isHumanResources$ | async" class="col-2">
+        <span class="pointer d-inline-flex" (click)="onDashboardNavigateClick('human-resources')">
+          <mat-icon class="p-0" matTooltip="Manage Human Resources">person_add</mat-icon>
+        </span>
+      </div>
+      <div *ngIf="isAssets$ | async" class="col-2">
+        <span class="pointer d-inline-flex" (click)="onDashboardNavigateClick('human-resources')">
+          <mat-icon class="p-0" matTooltip="Manage Assets">local_shipping</mat-icon>
+        </span>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+
+
+<div class="container-fluid">
+  <div class="row" [ngSwitch]="(homeView$ | async)">
+    <div class="col-12 w-100 m-0 p-0">
+
+      <div *ngSwitchCase="'my-feed'">
+        <Feed></Feed>
+      </div>
+      <div *ngSwitchCase="'browse-businesses'">
+        <BrowseBusinesses></BrowseBusinesses>
+      </div>
+      <div *ngSwitchCase="'browse-equipment'">
+        
+      </div>
+      <div *ngSwitchCase="'browse-loads'">
+        
+      </div>
+      <div *ngSwitchDefault>
+        <Feed></Feed>
+      </div>
+        
+    </div>
+  </div>
+</div>        
+
+
+

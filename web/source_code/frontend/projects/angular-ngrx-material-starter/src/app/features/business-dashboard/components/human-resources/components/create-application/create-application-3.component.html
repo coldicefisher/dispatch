@@ -1,0 +1,156 @@
+
+<div class="row w-100">
+  <div class="col align-right pointer">
+    <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+  </div>
+</div>
+
+<form [formGroup]="history">
+  <h3>{{ 'custom.create-application.history-title' | translate }}</h3>
+
+
+  <div class="row">
+    <div class="col col-12 col-sm-6">
+      <mat-form-field appearance="fill" class="modal-control">
+        <mat-label>{{ 'custom.create-application.employment-history-lookback-label' | translate }}</mat-label>
+        <input matInput placeholder="365"
+          formControlName="employmentHistoryLookbackCtrl">
+        <mat-error *ngIf="history.get('employmentHistoryLookbackCtrl').hasError('required')">
+          {{ 'custom.create-application.employment-history-lookback-error' | translate }}
+        </mat-error>
+        <mat-error *ngIf="history.get('employmentHistoryLookbackCtrl').hasError('numericError')">
+          {{ 'custom.create-application.lookback-numeric-error' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col col-12 col-sm-6">
+      <mat-form-field class="width-100 modal-control">
+        <mat-label>{{ 'custom.create-application.employment-history-allow-gaps-label' | translate }}</mat-label>
+        <mat-select formControlName="employmentHistoryAllowGapsCtrl" class="" appearance="fill" value="No" required>
+          <mat-option value="No">No</mat-option>
+          <mat-option value="Yes">Yes</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </div>
+
+  <div class="row modal-row-single">
+    <div class="col-12">
+      <mat-form-field appearance="fill" class="modal-control">
+        <mat-label>{{ 'custom.create-application.employment-history-disclaimer-label' | translate }}</mat-label>
+        <textarea matInput placeholder=""
+          formControlName="employmentHistoryDisclaimerCtrl" class="textarea-paragraph"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+<!--
+  <div class="row">
+    <div class="col col-12 col-sm-6">
+      <mat-form-field appearance="fill" class="modal-control">
+        <mat-label>{{ 'custom.create-application.work-history-lookback-label' | translate }}</mat-label>
+        <input matInput placeholder="365"
+          formControlName="workHistoryLookbackCtrl">
+        <mat-error *ngIf="history.get('workHistoryLookbackCtrl').hasError('required')">
+          {{ 'custom.create-application.work-history-lookback-error' | translate }}
+        </mat-error>
+        <mat-error *ngIf="history.get('workHistoryLookbackCtrl').hasError('numericError')">
+          {{ 'custom.create-application.lookback-numeric-error' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col col-12 col-sm-6">
+      <mat-form-field class="width-100 modal-control">
+        <mat-label>{{ 'custom.create-application.work-history-allow-gaps-label' | translate }}</mat-label>
+        <mat-select formControlName="workHistoryAllowGapsCtrl" class="" appearance="fill" value="No" required>
+          <mat-option value="No">No</mat-option>
+          <mat-option value="Yes">Yes</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </div>
+
+  <div class="row modal-row-single">
+    <div class="col-12">
+      <mat-form-field appearance="fill" class="modal-control">
+        <mat-label>{{ 'custom.create-application.work-history-disclaimer-label' | translate }}</mat-label>
+        <textarea matInput placeholder=""
+          formControlName="workHistoryDisclaimerCtrl" class="textarea-paragraph"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+    -->
+  <!-- End Work History begin Address History -->
+  <div class="row">
+    <div class="col col-12 col-sm-6">
+      <mat-form-field appearance="fill" class="modal-control width-100">
+        <mat-label>{{ 'custom.create-application.address-history-lookback-label' | translate }}</mat-label>
+        <input matInput placeholder="365"
+          formControlName="addressHistoryLookbackCtrl">
+        <mat-error *ngIf="history.get('addressHistoryLookbackCtrl').hasError('required')">
+          {{ 'custom.create-application.address-history-lookback-error' | translate }}
+        </mat-error>
+        <mat-error *ngIf="history.get('addressHistoryLookbackCtrl').hasError('numericError')">
+          {{ 'custom.create-application.lookback-numeric-error' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col col-12 col-sm-6">
+    <mat-form-field class="width-100 modal-control">
+      <mat-label>{{ 'custom.create-application.address-history-allow-gaps-label' | translate }}</mat-label>
+      <mat-select formControlName="addressHistoryAllowGapsCtrl" class="modal-control" appearance="fill" required>
+        <mat-option value="No">No</mat-option>
+        <mat-option value="Yes">Yes</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div class="row modal-row-single">
+    <div class="col-12">
+      <mat-form-field appearance="fill" class="modal-control">
+        <mat-label>{{ 'custom.create-application.address-history-disclaimer-label' | translate }}</mat-label>
+        <textarea matInput placeholder=""
+          formControlName="addressHistoryDisclaimerCtrl" class="textarea-paragraph"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-12 col-sm-6">
+    <mat-form-field class="width-100 modal-control">
+      <mat-label>{{ 'custom.create-application.education-history-include-label' | translate }}</mat-label>
+      <mat-select formControlName="educationHistoryIncludeCtrl" class="modal-control w-100" appearance="fill" required>
+        <mat-option value="No">No</mat-option>
+        <mat-option value="Yes">Yes</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  
+</form>
+
+<div class="row">
+  <div class="col col-12 col-md-4">
+    <button mat-stroked-button color="primary" class="btn-main"
+            type="button" (click)="onContinueClick()"
+            [disabled]="history.invalid">
+      Continue
+    </button>
+  </div>
+
+</div>
+
+<div class="row" >
+  <div class="col">
+    <button mat-button class="btn-normal" type="button" (click)="onPreviousClick()">
+      Previous
+    </button>
+
+    <button mat-button class="btn-normal" type="button" 
+          (click)="onResetClick()">
+      Cancel
+    </button>
+  </div>
+</div>

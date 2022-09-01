@@ -1,0 +1,51 @@
+FROM ubuntu:bionic-20200311
+
+# Update and clean up the install. Then add common repositories
+
+RUN apt-get update && apt-get autoremove && apt-get autoclean && \
+    apt-get install curl -y software-properties-common -y
+
+# Install my favorite libraries and some nifty tools
+
+RUN apt update && \
+    apt-get install apt-utils -y \
+    libffi-dev \
+    libssl-dev \
+    libxml2-dev \
+    libxslt-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    zlib1g-dev \
+    net-tools \
+    nano \
+    python3.8 -y \
+    python3-pip -y \
+    libpq-dev \
+    iputils-ping -y && \
+    apt update -y && \
+    apt-get install wget && \
+    wget -qO - https://packages.confluent.io/deb/6.1/archive.key | apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/6.1 stable main" && \
+    add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/6.1 stable main" && \
+    apt-get install librdkafka-dev -y && \
+    apt-get update -y && \
+    apt-get install sshpass -y && \
+    mkdir /custom
+
+
+WORKDIR /custom
+
+# Install python dependencies
+COPY requirements.txt /custom/
+RUN pip3 install -r requirements.txt
+
+ARG PROJECT=myproject
+ENV PROJECT_DIR=/var/www/${PROJECT}
+RUN mkdir -p ${PROJECT_DIR}
+WORKDIR ${PROJECT_DIR}
+ENV PYTHONPATH "${PYTHONPATH}:${PROJECT_DIR}"
+
+########################################################
+
+COPY entrypoint-microservice.sh /sbin/entrypoint-microservice.sh
+RUN chmod 755 /sbin/entrypoint-microservice.sh

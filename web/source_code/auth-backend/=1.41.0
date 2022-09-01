@@ -1,0 +1,12 @@
+Requirement already satisfied: rust in /usr/local/lib/python3.6/dist-packages
+Requirement already satisfied: matplotlib in /usr/local/lib/python3.6/dist-packages (from rust)
+Requirement already satisfied: biopython in /usr/local/lib/python3.6/dist-packages (from rust)
+Requirement already satisfied: mock<=1.0.1 in /usr/local/lib/python3.6/dist-packages (from rust)
+Requirement already satisfied: pysam in /usr/local/lib/python3.6/dist-packages (from rust)
+Requirement already satisfied: numpy>=1.15 in /usr/local/lib/python3.6/dist-packages (from matplotlib->rust)
+Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.6/dist-packages (from matplotlib->rust)
+Requirement already satisfied: pillow>=6.2.0 in /usr/local/lib/python3.6/dist-packages (from matplotlib->rust)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.3 in /usr/local/lib/python3.6/dist-packages (from matplotlib->rust)
+Requirement already satisfied: kiwisolver>=1.0.1 in /usr/local/lib/python3.6/dist-packages (from matplotlib->rust)
+Requirement already satisfied: python-dateutil>=2.1 in /usr/local/lib/python3.6/dist-packages (from matplotlib->rust)
+Requirement already satisfied: six in /usr/lib/python3/dist-packages (from cycler>=0.10->matplotlib->rust)

@@ -1,0 +1,100 @@
+
+<div class="container main-form-container mx-auto">
+  <mat-card>
+    <div class="">
+      <mat-card-title>
+        <!--<h3>{{ 'custom.user.profile.security.title' | translate }}</h3>-->
+      </mat-card-title>
+    </div>    
+    
+    <mat-card-content>
+      <form [formGroup]="form" class="">
+        <div class="row w-100">
+          <div class="col align-right pointer">
+            <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+          </div>
+        </div>
+   
+        <div class="" *ngIf="createFormIndustryCategory$ | async; let category; else otherTemplate">
+          <ng-container *ngIf="category==='Broker' || category==='Carrier'; then truckerTemplate; else otherTemplate">
+          </ng-container>
+          <ng-template #truckerTemplate>
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="modal-control">
+                  <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.create-business.mc-number-label' | translate }}"
+                    formControlName="mcNumberCtrl"  cdkFocusInitial>
+                  <mat-error *ngIf="form.get('mcNumberCtrl')?.hasError('required')">
+                    {{ 'custom.user.profile.create-business.mc-number-error' | translate }}
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="modal-control">
+                  <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.create-business.dot-number-label' | translate }}"
+                  formControlName="dotNumberCtrl">
+                  <mat-error *ngIf="form.get('dotNumberCtrl')?.hasError('required')">
+                    {{ 'custom.user.profile.create-business.dot-number-error' | translate }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </ng-template>
+
+          <!-- End Broker or Carrier  category!='Carrier'-->
+        </div>
+        <ng-template #otherTemplate>
+          <div class="row" >
+            <div class="col">
+              <mat-form-field appearance="fill" class="modal-control" >  
+                <input matInput placeholder="Choose Industry" aria-label="Choose Industry" 
+                        [matAutocomplete]="autoIndustry" formControlName="industryCtrl" (blur)="checkIndustry()">
+                
+                <mat-error *ngIf="form.get('industryCtrl')?.hasError('required')">
+                  {{ 'custom.user.profile.create-business.industry-error' | translate }}
+                </mat-error>
+            
+                
+                <mat-autocomplete #autoIndustry="matAutocomplete" (optionSelected)="industryClick($event)">
+                  <mat-option *ngFor="let industry of filteredIndustries | async" [value]="industry.value">
+                      <span>{{ industry.display }}</span>
+                    
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+        </ng-template>
+
+        <div class="row">
+          <div class="col col-12 col-md-4">
+            <button mat-raised-button color="primary" class="btn-main"
+                    type="button"
+                    (click)="onContinueClick()"
+                    [disabled]="form.invalid"
+                  >
+              Continue
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <button mat-button class="btn-normal" type="button" (click)="onPreviousClick()">
+              Previous
+            </button>
+            <button mat-stroked-button class="btn-normal" type="button" (click)="onNoClick()">
+              Cancel
+            </button>
+          </div>
+        </div>
+        
+      </form>
+    
+    </mat-card-content>
+  </mat-card>
+</div>
+    

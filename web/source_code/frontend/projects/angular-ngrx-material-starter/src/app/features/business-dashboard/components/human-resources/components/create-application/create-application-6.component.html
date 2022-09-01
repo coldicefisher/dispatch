@@ -1,0 +1,313 @@
+
+
+<div class="row w-100">
+  <div class="col align-right pointer">
+    <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+  </div>
+</div>
+
+<form [formGroup]="system">
+  <h2>{{ 'custom.create-application.review-title' | translate }}</h2>
+
+  <ng-container *ngIf="createApplication$ | async; let application">
+
+    <mat-card>
+      <mat-card-title>
+        <h3>{{ 'custom.create-application.system-title' | translate }}</h3>
+      </mat-card-title>
+      
+      <mat-card-content>
+        <div class="row">
+          <div class="col col-3">
+            Name
+          </div>
+          <div class="col col-6">
+            {{ application.applicationName }}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-3">
+            Description
+          </div>
+          <div class="col col-6">
+            {{ application.description }}
+          </div>
+        </div>
+          
+        <div class="row">
+          <div class="col col-3">
+            Visibility
+          </div>
+          <div class="col col-6">
+            {{ application.visibility }}
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>
+        <h3>{{ 'custom.create-application.demographics-title' | translate }}</h3>
+      </mat-card-title>
+      <mat-card-content>
+        <div class="row" *ngFor="let field of createApplication.demographicsFields">
+          <div class="col col-2">
+            {{ field.fieldName }}
+          </div>
+          <div class="col col-2">
+            {{ field.fieldType }}
+          </div>
+          <div class="col col-6">
+            <span class="inline-span" *ngFor="let value of field.fieldValues">
+              {{ value }}
+            </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-3">
+            Applicant disclaimer
+          </div>
+          <div class="col col-9">
+            <p class="preserve-format">{{ application.demographicsDisclaimer }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>
+        <h3>{{ 'custom.create-application.history-title' | translate }}</h3>
+      </mat-card-title>
+      <mat-card-content>
+        <div class="row">
+          <div class="col col-3">
+            Required employment history
+          </div>
+          <div class="col col-6">
+            {{ application.employmentHistoryLookback }} days
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-3">
+            Allow gaps in employment history?
+          </div>
+          <div class="col col-6">
+            {{ application.employmentHistoryAllowGaps ? 'Yes' : 'No' }}
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col col-3">
+            Employment history disclaimer
+          </div>
+          <div class="col col-9">
+            <p class="preserve-format">{{ application.employmentHistoryDisclaimer }}</p>
+          </div>
+        </div>
+<!--
+        <div class="row">
+          <div class="col col-3">
+            Required work history
+          </div>
+          <div class="col col-6">
+            {{ application.workHistoryLookback }} days
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-3">
+            Allow gaps in work history?
+          </div>
+          <div class="col col-6">
+            {{ application.workHistoryAllowGaps ? 'Yes' : 'No' }}
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col col-3">
+            Work history disclaimer
+          </div>
+          <div class="col col-9">
+            <p class="preserve-format">{{ application.workHistoryDisclaimer }}</p>
+          </div>
+        </div>
+    -->
+        <div class="row">
+          <div class="col col-3">
+            Required address history
+          </div>
+          <div class="col col-6">
+            {{ application.addressHistoryLookback }} days
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-3">
+            Allow gaps in address history?
+          </div>
+          <div class="col col-6">
+            {{ application.addressHistoryAllowGaps ? 'Yes' : 'No'  }}
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col col-3">
+            Address history disclaimer
+          </div>
+          <div class="col col-9">
+            <p class="preserve-format">{{ application.addressHistoryDisclaimer }}</p>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col col-3">
+            Require education history?
+          </div>
+          <div class="col col-6">
+            {{ application.educationHistoryInclude ? 'Yes' : 'No'  }}
+          </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>
+        <h3>{{ 'custom.create-application.driving-history-title' | translate }}</h3>
+      </mat-card-title>
+
+      <mat-card-content>
+        <div class="row">
+          <div class="col col-3">
+            Require driving history?
+          </div>
+          <div class="col col-6">
+            {{ application.drivingHistoryInclude ? 'Yes' : 'No'  }}
+          </div>
+        </div>
+        
+        <ng-container *ngIf="(application.drivingHistoryInclude)==true">
+          
+          <div class="row">
+            <div class="col col-3">
+              Required license history
+            </div>
+            <div class="col col-6">
+              {{ application.licenseHistoryLookback }} days
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-3">
+              License history disclaimer
+            </div>
+            <div class="col col-9">
+              <p class="preserve-format">{{ application.licenseHistoryDisclaimer }}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-3">
+              Require violations and accident history?
+            </div>
+            <div class="col col-6">
+              {{ application.accidentHistoryInclude ? 'Yes' : 'No'  }}
+            </div>
+          </div>
+
+          <ng-container *ngIf="(application.accidentHistoryInclude)==true">
+            <div class="row">
+              <div class="col col-3">
+                Required accident history
+              </div>
+              <div class="col col-6">
+                {{ application.accidentHistoryLookback }} days
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col col-3">
+                Violations and accident history disclaimer
+              </div>
+              <div class="col col-9">
+                <p class="preserve-format">{{ application.accidentHistoryDisclaimer }}</p>
+              </div>
+            </div>
+          </ng-container>
+
+          <div class="row">
+            <div class="col col-3">
+              Include equipment history?
+            </div>
+            <div class="col col-6">
+              {{ application.equipmentExperienceInclude ? 'Yes' : 'No'  }}
+            </div>
+          </div>
+          <ng-container *ngIf="(application.equipmentExperienceInclude)==true">
+            <div class="row">
+              <div class="col col-3">
+                Equipment types
+              </div>
+              <div class="col col-9">
+                <span class="inline-span" *ngFor="let type of application.equipmentTypes">
+                  {{ type }}
+                </span>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+        
+
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card>
+      <mat-card-title>
+        <h3>{{ 'custom.create-application.final-title' | translate }}</h3>
+      </mat-card-title>
+      
+      <mat-card-content>
+        <div class="row">
+          <div class="col col-3">
+            Application disclaimer
+          </div>
+          <div class="col col-9">
+            <p class="preserve-format">{{ application.applicationDisclaimer }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  
+  </ng-container>
+
+  <div class="row">
+    <div class="col col-12 col-md-4">
+      <button mat-stroked-button color="primary" class="btn-main"
+              type="button"  (click)="onContinueClick()"
+              [disabled]="system.invalid">
+        Continue
+      </button>
+    </div>
+
+  </div>
+
+  
+<div class="row" >
+  <div class="col">
+    <button mat-button class="btn-normal" type="button" (click)="onPreviousClick()">
+      Previous
+    </button>
+
+    <button mat-button class="btn-normal" type="button" 
+          (click)="onResetClick()">
+      Cancel
+    </button>
+  </div>
+</div>
+
+
+
+</form>

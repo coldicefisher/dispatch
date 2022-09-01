@@ -1,0 +1,239 @@
+version: '3.8'
+
+networks:
+  default:
+    external:
+      name: main-network
+
+services:
+
+  # Redis //////////////////////////////////////////////////////////////////////////////
+  dispatch-redis:
+    container_name: dispatch-redis
+    image: redis:6.0.6-alpine
+    restart: always
+    # networks:
+    #   - dispatch-network
+
+  # End Redis //////////////////////////////////////////////////////////////////////////
+
+  # auth backend  //////////////////////////////////////////////////////////////////////
+
+  dispatch-auth-backend:
+  
+    build:
+      context: ./auth-backend
+      dockerfile: Dockerfile-auth-backend
+    command: /sbin/entrypoint-auth-backend.sh
+    container_name: dispatch-auth-backend 
+    image: dispatch-auth-backend
+
+    depends_on:
+      - dispatch-redis
+    #  - dispatch-postgres
+
+    env_file:
+      - ./.env
+
+    ports:
+    - 8001:8000 # Docker
+
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./../source_code/auth-backend:/var/www/auth-backend
+      - ./../source_code/libs:/var/www/auth-backend/libs
+      - ./../source_code/auth-backend/media:/var/www/auth-backend/media
+      # - ./../source_code/static:/var/www/myproject/static
+      - ./../source_code/auth-backend/static:/var/www/auth-backend/static
+    dns:
+    - 8.8.8.8
+    - 1.1.1.1
+    restart: always
+    # networks:
+    #   - dispatch-network  
+
+  # End auth backend  //////////////////////////////////////////////////////////////////
+
+# backend  ///////////////////////////////////////////////////////////////////////////
+
+  dispatch-backend:
+  
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-backend
+    command: /sbin/entrypoint-backend.sh
+    container_name: dispatch-backend 
+    image: dispatch-backend
+
+    depends_on:
+      - dispatch-redis
+    #  - dispatch-postgres
+
+    env_file:
+      - ./.env
+
+    ports:
+    - 8002:8000 # Docker
+
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./../source_code/backend:/var/www/backend
+      - ./../source_code/libs:/var/www/backend/libs
+      # - ./../source_code/backend/media:/var/www/backend/media
+      # - ./../source_code/static:/var/www/myproject/static
+      # - ./../source_code/auth-backend/static:/var/www/backend/static
+    dns:
+    - 8.8.8.8
+    - 1.1.1.1
+    restart: always
+    # networks:
+    #   - dispatch-network  
+
+  # End backend  ///////////////////////////////////////////////////////////////////////
+
+# feed backend  ////////////////////////////////////////////////////////////////////////
+
+  dispatch-feed-backend:
+  
+    build:
+      context: ./feed-backend
+      dockerfile: Dockerfile-feed-backend
+    command: /sbin/entrypoint-feed-backend.sh
+    container_name: dispatch-feed-backend 
+    image: dispatch-feed-backend
+
+    depends_on:
+      - dispatch-redis
+    #  - dispatch-postgres
+
+    env_file:
+      - ./.env
+
+    ports:
+    - 8003:8000 # Docker
+
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./../source_code/feed-backend:/var/www/feed-backend
+      - ./../source_code/libs:/var/www/feed-backend/libs
+      # - ./../source_code/backend/media:/var/www/backend/media
+      # - ./../source_code/static:/var/www/myproject/static
+      # - ./../source_code/auth-backend/static:/var/www/backend/static
+    dns:
+    - 8.8.8.8
+    - 1.1.1.1
+    restart: always
+    # networks:
+    #   - dispatch-network  
+
+  # End business backend  //////////////////////////////////////////////////////////////
+
+
+  # Client  ///////////////////////////////////////////////////////////////////////////
+  dispatch-client:
+    build:
+      context: ./client
+    command: /sbin/entrypoint-frontend.sh
+    container_name: dispatch-client
+    image: dispatch-client
+
+    depends_on:
+      - dispatch-auth-backend
+
+    #environment:
+    #  - CHROME_BIN=chromium-browser
+    ports:
+      - 4200:4200
+
+    volumes:
+      - ./../source_code/frontend:/var/www/frontend
+      
+    # networks:
+    #   - dispatch-network  
+    env_file:
+      - ./.env
+      
+    restart: always
+
+  # End Client  ////////////////////////////////////////////////////////////////////////
+
+  # Reverse Proxy //////////////////////////////////////////////////////////////////////
+  nginx-revproxy:
+    build:
+      context: ./proxy
+    container_name: dispatch-nginx-revproxy
+    image: dispatch-nginx-revproxy
+    depends_on:
+      - dispatch-auth-backend
+      - dispatch-client
+    ports:
+      - 80:80
+    restart: always
+    volumes:
+      - ./../source_code/backend/media:/usr/src/app/media
+      - ./../source_code/backend/static:/usr/src/app/static
+      # - media:/usr/src/app/media
+      
+    # networks:
+    #   - dispatch-network
+
+  # Cassandra /////////////////////////////////////////////////////////////////////////
+  dispatch-cassandra:
+    build:
+      context: ./cassandra
+      dockerfile: Dockerfile
+    container_name: dispatch-cassandra
+    ports:
+      - "9160:9160"
+      - "9042:9042"
+    env_file: ./.env
+
+    volumes: 
+      - ./../source_code/databases/cassandra_data:/var/lib/cassandra
+      # - ./cassandra.yaml:/etc/cassandra/cassandra.yaml
+      
+    
+    # networks:
+    #   - dispatch-network
+    
+    restart: always    
+  # End Cassandra /////////////////////////////////////////////////////////////////////
+
+volumes:
+#   media:
+    
+  dispatch-static:
+    
+    driver_opts:
+      type: none
+      o: bind
+      device: ./../source_code/backend/static
+
+
+  # Postgres ///////////////////////////////////////////////////////////////////////////
+
+  # dispatch-postgres:
+  #   build: 
+  #     context: ./postgres
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5432:5432"
+  #   env_file: ./.env
+  #   command: "--wal_keep_segments=32 --logging_collector=off"
+  #   container_name: dispatch-postgres
+  #   restart: always
+
+  #   environment:
+  #     - POSTGRES_PASSWORD=postgres
+  #   volumes:
+  #   - ./../source_code/databases/postgres_data:/var/lib/postgresql
+  #   networks:
+  #     - dispatch-network
+
+  # End Postgres //////////////////////////////////////////////////////////////////////
+
+
+  # End Redis  ////////////////////////////////////////////////////////////////////////

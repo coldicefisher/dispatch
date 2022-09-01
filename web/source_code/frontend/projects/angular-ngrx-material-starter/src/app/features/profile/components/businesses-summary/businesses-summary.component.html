@@ -1,0 +1,45 @@
+<!--
+<mat-card>
+  <div class="container">
+    <mat-card-title>
+      <h3>{{ 'custom.user.profile.security.title' | translate }}</h3>
+    </mat-card-title>
+  </div>    
+  
+  <mat-card-content>
+  -->
+
+    <div class="container">
+      <form [formGroup]="form">
+        
+        <div class="row">
+          <div class="col">
+            <button mat-raised-button color="primary" class="btn-wide" type="button" (click)="onCreateBusiness()">
+              Create Business
+            </button>
+          </div>
+        </div>
+        
+        <div *ngFor="let business of businesses$ | async">
+          <div class="row pointer" (click)="onSelectBusiness(business.item.uid, business.item.name)">
+            <div class="col-6">
+              <span class="text-primary">
+                {{ business.item.name }}
+              </span>
+            </div>
+            <div class="col-6 align-right">
+              <span class="" style="">
+                {{ business.item.permissions.join(", ") }}
+              </span>
+            </div>
+            
+          </div>
+          <hr>
+        </div>
+        
+      </form>
+    </div>
+<!--  
+  </mat-card-content>
+</mat-card>
+-->

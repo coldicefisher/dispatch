@@ -1,0 +1,29 @@
+.option-search {
+  height: 65px;
+}
+
+
+.search-image-container {
+  min-height: 65px;
+  min-width: 65px;
+  position: relative;
+}
+
+.search-image { 
+  width: 60px;
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+} 
+.search-image img { 
+  display: relative;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;    
+}
+
+.search-option-name {
+  padding-left: 50px;
+  //margin-left: 50px;
+}

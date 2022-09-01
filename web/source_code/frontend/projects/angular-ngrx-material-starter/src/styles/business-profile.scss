@@ -1,0 +1,41 @@
+
+.banner {
+  min-height: 425px!important;
+  height: 410!important;
+  width: 100%!important;
+  position: relative;
+
+  
+  .banner-image {
+    width: 100%!important;
+    height: 375px!important;
+    // background-repeat: no-repeat;
+    // background-size: 100%!important;
+    // position: relative;
+    // top: 0;
+    // left: 0;
+    // bottom: 0;
+    // right: 0;
+    // background-image: url('../../../assets/network.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100%!important;
+    opacity: 1;
+    content: '';
+    z-index: 0;
+    border-radius: 10px!important;
+    
+
+  }
+.fade { 
+    position: absolute; 
+    bottom: 90px; 
+    height: 100px; 
+    z-index: 2; 
+    background: rgba(255, 255, 255, 0) 
+    linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 80%) repeat scroll 0 0;  
+  }
+}
+.container-business {
+  max-width: 1280px;
+}

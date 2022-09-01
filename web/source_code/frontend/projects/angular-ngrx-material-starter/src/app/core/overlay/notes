@@ -1,0 +1,2 @@
+This module provides an overlay on the application. It is used in conjuction with th progress spinner to show that the 
+application is loading.

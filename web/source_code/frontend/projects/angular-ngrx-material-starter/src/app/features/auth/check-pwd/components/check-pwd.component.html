@@ -1,0 +1,31 @@
+
+<form [formGroup]="form" (ngSubmit)="onCheck()">
+
+  <mat-card>
+    <mat-card-title>{{ 'custom.auth.check-pwd.title' | translate }}</mat-card-title>
+    
+    <div class="row">
+      <mat-form-field class="col">
+        <input matInput placeholder="{{ 'custom.auth.check-pwd.password-label' | translate }}"
+          formControlName="password" type="password">
+        <mat-error *ngIf="form.get('password')?.hasError('required')">
+          
+          {{ 'custom.auth.check-pwd.error1' | translate }}
+        </mat-error>
+        
+      </mat-form-field>
+    </div>
+    <div class="row justify-content-end">
+      <div class="col">
+        <button mat-raised-button color="primary" class="btn-normal" [disabled]="form.invalid">
+          {{ 'custom.submit' | translate }}
+        </button>
+        <button mat-stroked-button class="btn-normal" type="button" (click)="onSignUp()">
+          {{ 'custom.register' | translate }}
+        </button>
+      </div>
+    </div>
+
+  </mat-card>
+
+</form>

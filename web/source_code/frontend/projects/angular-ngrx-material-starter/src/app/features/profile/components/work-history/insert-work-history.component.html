@@ -1,0 +1,258 @@
+
+<div class="modal-dialog">
+
+  <form [formGroup]="form">
+    <div class="row w-100">
+      <div class="col align-right pointer">
+        <mat-icon class="text-danger" (click)="onNoClick()">cancel</mat-icon>
+      </div>
+    </div>
+
+    <h1 mat-dialog-title class="modal-row-single">
+      {{ 'custom.user.profile.insert-work-history.title' | translate }}
+    </h1>
+  
+    
+      <mat-dialog-content>
+      
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field class="modal-control">
+              <input matInput class="modal-control" placeholder="{{ 'custom.user.profile.insert-work-history.business-name-label' | translate }}"
+                formControlName="businessName" cdkFocusInitial>
+              <mat-error *ngIf="form.get('businessName')?.hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.business-name-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row modal-row-double">
+          <div class="col-lg-6 col-sm-6"> 
+            <mat-form-field appearance="fill" class="modal-control">
+              <mat-label>{{ 'custom.user.profile.insert-work-history.start-date-label' | translate }}</mat-label>
+              <input matInput  class="modal-control" [matDatepicker]="startDatePicker" formControlName="startDate">
+              <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #startDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          
+          <div class="col-lg-6 col-sm-6">
+            <mat-form-field appearance="fill" class="modal-control">
+              <mat-label>{{ 'custom.user.profile.insert-work-history.end-date-label' | translate }}</mat-label>
+              <input matInput [matDatepicker]="endDatePicker" formControlName="endDate">
+              <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row modal-row-single">
+          <div class="col">
+            <GoogleAutoAddress (setAddress)="getAddress($event)" addressType="geocode"></GoogleAutoAddress>
+          </div>
+        </div>
+
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field appearance="fill" class="modal-control" >
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.physical-address1-label' | translate }}"
+                formControlName="physicalAddress1">
+              <mat-error *ngIf="form.get('physicalAddress1').hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.physical-address1-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.physical-address2-label' | translate }}"
+                formControlName="physicalAddress2">
+              <mat-error *ngIf="form.get('physicalAddress2').hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.physical-address2-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        
+        <div class="row modal-row-double">
+          <div class="col-lg-6 col-sm-12">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.physical-city-label' | translate }}"
+                formControlName="physicalCity">
+              <mat-error *ngIf="form.get('physicalCity').hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.physical-city-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        
+          <div class="col-lg-3 col-sm-12">
+            <mat-form-field appearance="fill" class="modal-control">  
+              <input matInput placeholder="State" aria-label="State" [matAutocomplete]="autoPhyState" [formControl]="phyStateCtrl">
+              <mat-error *ngIf="phyStateCtrl?.hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.physical-state-error' | translate }}
+              </mat-error>
+              <mat-autocomplete #autoPhyState="matAutocomplete">
+                <mat-option *ngFor="let state of filteredPhyStates | async" [value]="state.abbreviation">
+                  <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
+                  <span>{{ state.name }}</span>
+                  
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        
+        
+          <div class="col-lg-3 col-sm-12">
+            <mat-form-field appearance="fill" class="modal-control" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.physical-zip-label' | translate }}"
+                formControlName="physicalZip">
+              <mat-error *ngIf="form.get('physicalZip').hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.physical-zip-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+        </div>
+        
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.mailing-address1-label' | translate }}"
+                formControlName="mailingAddress1">
+              <mat-error *ngIf="form.get('mailingAddress1').hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.mailing-address1-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.mailing-address2-label' | translate }}"
+                formControlName="mailingAddress2">
+              <mat-error *ngIf="form.get('mailingAddress2').hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.mailing-address2-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row modal-row-double">
+          <div class="col-lg-6 col-sm-12">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.mailing-city-label' | translate }}"
+                formControlName="mailingCity">
+              <mat-error *ngIf="form.get('mailingCity').hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.mailing-city-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        
+          <div class="col-lg-3 col-sm-12">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="State" aria-label="State" [matAutocomplete]="autoMailState" [formControl]="mailStateCtrl">
+              <mat-autocomplete #autoMailState="matAutocomplete">
+                
+                <mat-option *ngFor="let state of filteredMailStates | async" [value]="state.abbreviation">
+                  <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
+                  <span>{{ state.name }}</span>
+                  
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        
+          <div class="col-lg-3 col-sm-12">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.mailing-zip-label' | translate }}"
+                formControlName="mailingZip">
+              <mat-error *ngIf="form.get('mailingZip').hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.mailing-zip-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.positions-held-label' | translate }}"
+                formControlName="positionsHeld">
+              <mat-error *ngIf="form.get('positionsHeld').hasError('required')">
+                {{ 'custom.user.profile.insert-work-history.positions-held-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field appearance="fill" class="modal-control">
+              <textarea matInput placeholder="{{ 'custom.user.profile.insert-work-history.description-label' | translate }}"
+                formControlName="description" class="textarea-paragraph"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.supervisor-label' | translate }}"
+                formControlName="supervisor">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.phone-number-label' | translate }}"
+                formControlName="phoneNumber">
+            <mat-error>
+              {{ 'custom.user.profile.insert-work-history.phone-number-error' | translate }}
+            </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.email-label' | translate }}"
+                formControlName="email">
+              <mat-error>
+                {{ 'custom.user.profile.insert-work-history.email-error' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row modal-row-single">
+          <div class="col">
+            <mat-form-field appearance="fill" class="modal-control">
+              <input matInput placeholder="{{ 'custom.user.profile.insert-work-history.website-label' | translate }}"
+                formControlName="website">
+            </mat-form-field>
+          </div>
+        </div>
+
+      <div mat-dialog-actions class="row modal-row-single">
+        <div class="col">
+          <button mat-raised-button type="button" color="primary" class="btn-normal"
+            (click)="onAddWorkHistory()"  [disabled]="form.invalid || phyStateCtrl.invalid">Update</button>
+          <button mat-button type="button"  class="btn-normal" (click)="onNoClick()">Cancel</button>
+        </div>
+      </div>
+    
+    </mat-dialog-content>
+  
+  </form>
+</div>

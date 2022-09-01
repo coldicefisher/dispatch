@@ -1,0 +1,349 @@
+{
+  "bizniz.about.change-theme": "Change Theme",
+  "bizniz.about.check-blogs": "or check blogs about",
+  "bizniz.about.contributors.description1": "Want to start contributing to open source with Angular?",
+  "bizniz.about.contributors.description2": "Leave your mark and join the growing team of contributors!",
+  "bizniz.about.contributors.description3": "Get started by having a look on ",
+  "bizniz.about.contributors.description4": " and ",
+  "bizniz.about.contributors.guide": "Contributor guide",
+  "bizniz.about.contributors.issues": "open issues",
+  "bizniz.about.contributors.title": "Contributors",
+  "bizniz.about.get-notified.description": "a Twitter bot that helps you to stay up to date with releases of popular frontend frameworks & libraries!",
+  "bizniz.about.get-notified.follow": "Follow",
+  "bizniz.about.get-notified.title": "Get notified about new releases",
+  "bizniz.about.get-started": "Get started",
+  "bizniz.features.angular": "Modern powerful framework",
+  "bizniz.features.angular-cli": "A command line interface for Angular",
+  "bizniz.features.angular-material": "Material design component library",
+  "bizniz.features.bootstrap": "Responsive layout from battle tested, world most famous UI library",
+  "bizniz.features.cypress": "Cypress is a next generation front end testing tool built for the modern web.",
+  "bizniz.features.documentation": "Docs",
+  "bizniz.features.fontawesome": "Easy to use vector icons and social logos",
+  "bizniz.features.guide": "Guide",
+  "bizniz.features.lazyloading.description": "Faster startup time with lazy loaded feature modules",
+  "bizniz.features.lazyloading.title": "Lazy loading",
+  "bizniz.features.ngrx": "One way data flow powered by RxJS Observables",
+  "bizniz.features.ngxtranslate": "An internationalization library for Angular",
+  "bizniz.features.rxjs": "Reactive programming with async collections using Observables",
+  "bizniz.features.themes.description": "Flexible theming support for provided and custom components",
+  "bizniz.features.themes.title": "Themes",
+  "bizniz.features.title": "Features",
+  "bizniz.features.typescript": "Superior developer experience, code completion, refactoring and less bugs",
+  "bizniz.features.eslint": "ESLint is for identifying problematic patterns found in JavaScript and Typescript code",
+  "bizniz.footer.changelog": "Show changelog",
+  "bizniz.header.github": "Project Github Repository",
+  "bizniz.menu.about": "About",
+  "bizniz.menu.examples": "Examples",
+  "bizniz.menu.features": "Features",
+  "bizniz.menu.Login": "Sign in",
+  "bizniz.menu.logout": "Logout",
+  "bizniz.menu.profile": "Profile",
+  "bizniz.menu.settings": "Settings",
+  "bizniz.settings.animations.elements": "Navigation page elements slide up",
+  "bizniz.settings.animations.page": "Navigation whole page transition",
+  "bizniz.settings.animations.title": "Animations",
+  "bizniz.settings.general.language.de": "German",
+  "bizniz.settings.general.language.en": "English",
+  "bizniz.settings.general.language.es": "Spanish",
+  "bizniz.settings.general.language.fr": "French",
+  "bizniz.settings.general.language.he": "Hebrew",
+  "bizniz.settings.general.language.pt-br": "Portuguese",
+  "bizniz.settings.general.language.sk": "Slovak",
+  "bizniz.settings.general.language.zh-cn": "Simple Chinese",
+  "bizniz.settings.general.placeholder": "Language",
+  "bizniz.settings.general.title": "General",
+  "bizniz.settings.themes.blue": "Blue",
+  "bizniz.settings.themes.dark": "Dark",
+  "bizniz.settings.themes.light": "Light",
+  "bizniz.settings.themes.nature": "Nature",
+  "bizniz.settings.themes.night-mode": "Auto night mode (from 21:00 to 7:00)",
+  "bizniz.settings.themes.placeholder": "Color Theme",
+  "bizniz.settings.themes.saneago": "",
+  "bizniz.settings.themes.sticky-header": "Sticky header",
+  "bizniz.settings.themes.title": "Themes",
+  "bizniz.settings.title": "Settings",
+  "bizniz.title.long": "bizniz.io",
+  "bizniz.title.short": "bizniz.io",
+  "custom": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "register": "Register",
+    "forgot-password": "Forgot Password",
+    "forgot-username": "Forgot Username",
+    "add-address": "Add Verification Method",
+    "username-label": "Username",
+    "auth": {
+      "error-address": "Please enter a valid phone number or email",
+      "otp-send-button": "Send Code",
+      "check-device": {
+        "title": "Login",
+        "username-label": "Username",
+        "error1": "Username is required"
+    
+      },
+      "otp-options": {
+        "title": "Send authentication code to",
+        "addOption-label": "Add email or phone number",
+        "addOption": "Add Contact",
+        "sendCode-label": "Send Code"
+      },
+      "otp-verify": {
+        "title": "Enter verification code",
+        "error1": "Verification code required",
+        "otpCode-label": "Verification code",
+        "trustThis-label": "Trust this device"
+      },
+      "check-pwd": {
+        "title": "Enter password",
+        "error1": "Password is required",
+        "password-label": "Password"
+      },
+      "sign-up": {
+        "title": "Sign up",
+        "firstname-label": "First name",
+        "error-firstname": "Please enter your first name",
+        "lastname-label": "Last name",
+        "error-lastname": "Please enter your last name",
+        "username-label": "Username",
+        "error-username": "Please enter your username",
+        "email-label": "Email",
+        "error-email": "Please enter your email in a correct format",
+        "pwd-label": "Password",
+        "error-pwd-length": "Password must be at least 12 characters!",
+        "error-pwd-number": "Password must contain 1 number!",
+        "error-pwd-capital": "Password must contain at least 1 in Capital Case!",
+        "error-pwd-small": "Password must contain at least 1 Letter in Small Case!",
+        "error-pwd-special": "Password must contain at least 1 Special Character!",
+        "pwd-confirm-label": "Confirm password",
+        "error-pwd-confirm": "Passwords must match!",
+        "register": "Register",
+        "q1-label": "Enter a question that you can always answer",
+        "q1-error-required": "Please enter a question",
+        "a1-label": "Answer 1",
+        "a1-error-required": "Please enter an answer",
+        "q2-label": "Enter another question that you can always answer",
+        "q2-error-required": "Please enter a question",
+        "a2-label": "Answer 2",
+        "a2-error-required": "Please enter an answer",
+        "phone-label": "Phone number",
+        "error-phone": "Please enter a phone number in the correct format"
+      },
+      "add-address": {
+        "title": "Add a new address",
+        "address-label": "Phone number or email",
+        "address-button": "Add Address"
+        
+      },
+      "retrieve-username": {
+        "title": "Retrieve username",
+        "address-label": "Enter an email or phone number associated with your account"
+
+      },
+      "retrieve-username-otp-verify": {
+        "title": "Enter verification code",
+        "error1":"Verification code required",
+        "otpCode-label": "Verification code"
+      },
+      "retrieve-username-questions-verify": {
+        "title": "Enter secret answers",
+        "a-label": "Enter answer",
+        "error1": "Answer is required"
+      },
+      "reset-password": {
+        "title": "Reset password",
+        "address-label": "Enter an email or phone number associated with your account",
+        "username-error": "Username is required"
+      }
+
+    },
+    "user": {
+      "profile": {
+        "work-history-title": "Work History",
+        "addresses-title": "Phone Numbers and Emails",
+        "address-history-title": "Address History",
+        "businesses-summary-title": "Businesses",
+        "insert-address-history": {
+          "title": "Add Address History",
+          "start-date-label": "Start Date",
+          "start-date-error": "Enter or select a date that you used this address",
+          "end-date-label": "End Date",
+          "address1-label": "Address Line 1",
+          "address1-error": "Address is required",
+          "address2-label": "Address Line 2",
+          "city-label": "City",
+          "city-error": "City is required",
+          "state-label": "State",
+          "state-error": "State is required",
+          "zip-label": "Zip Code",
+          "zip-error": "Zip code is required"
+        },
+        "insert-work-history": {
+          "title": "Add Work History",
+          "business-name-label": "Business Name",
+          "business-name-error": "Business is required",
+          "start-date-label": "Start Date",
+          "start-date-error": "Enter or select the date you started",
+          "end-date-label": "End Date",
+          "end-date-error": "Enter or select the date you left",
+          "positions-held-label": "Positions Held",
+          "positions-held-error": "Please enter the position/s you held",
+          "description-label": "Job Description",
+          "description-error": "Describe what you do/did at this business",
+          "physical-address1-label": "Physical Address 1",
+          "physical-address1-error": "Address is required",
+          "physical-address2-label": "Physical Address 2",
+          "physical-city-label": "Physical City",
+          "physical-city-error": "City is required",
+          "physical-state-label": "Physical State",
+          "physical-state-error": "State is required",
+          "physical-zip-label": "Physical Zip Code",
+          "physical-zip-error": "Zip code is required",
+          "mailing-address1-label": "Mailing Address 1",
+          "mailing-address1-error": "Address is required",
+          "mailing-address2-label": "Mailing Address 2",
+          "mailing-city-label": "Mailing City",
+          "mailing-city-error": "City is required",
+          "mailing-state-label": "Mailing State",
+          "mailing-state-error": "State is required",
+          "mailing-zip-label": "Mailing Zip Code",
+          "mailing-zip-error": "Zip code is required",
+          "supervisor-label": "Supervisor",
+          "phone-number-label": "Phone Number",
+          "phone-number-error": "Please enter a phone number in the correct format",
+          "email-label": "Business Email",
+          "email-error": "Please enter an email in the correct format",
+          "website-label": "Business Website"
+        },
+        "security": {
+          "title": "Security",
+          "change-password-title": "Change Password",
+          "change-password-button": "Update"
+          
+
+        },
+        "privacy": {
+          "title": "Privacy Settings"
+        },
+        "change-password": {
+          "current-password-label": "Enter your current password",
+          "new-password-label": "Enter your new password"
+        },
+        "businesses-summary": {
+          "title": "Businesses"
+        },
+        "create-business": {
+          "title": "Create a Business",
+          "name-label": "Business name",
+          "name-error": "Your business name is required",
+          "name-exists-error": "This business name is taken",
+          "legal-structure-error": "Please select the legal structure of your business",
+          "type-label": "Type of legal structure",
+          "fein-label": "Federal Employer Identification Number. Leave blank if you do not have one.",
+          "mc-number-label": "MC Number",
+          "mc-number-error": "MC Number is required to register as a Broker/Carrier",
+          "dot-number-label": "DOT Number",
+          "dot-number-error": "DOT Number is required to register as a Broker/Carrier",
+          "industry-error": "Please choose your industry"
+          
+        }
+      }
+    },
+    "dashboard": {
+      "menu": {
+        "dashboard-home": "Dashboard",
+       "human-resources": "Human Resources",
+       "dispatching": "Dispatching",
+       "user-management": "User Management",
+       "assets": "Assets",
+       "business-profile": "Business Profile"
+      },
+      "user-management": {
+        "add-profile": {
+          "first-name-label": "First name",
+          "first-name-error": "First and last names are required",
+          "middle-name-label": "Middle name",
+          "last-name-label": "Last name",
+          "last-name-error": "First and last names are required",
+          "suffix-label": "Suffix",
+          "email-label": "Email",
+          "email-error": "Email is required",
+          "email-error-format": "Email is in the wrong format. Try somebody@somewhere.com"
+        }
+      }
+    },
+    "legal": {
+      "full-name-label": "Enter your full name legal exactly as it appears",
+      "full-name-error": "Your signature name is required"
+    },
+    "smart-controls": {
+      "google-ac-address": {
+        "ac-label": "Search an address"
+      },
+      "check-business-name": {
+        "name-label":"Business name",
+        "name-error":"Business name is required",
+        "name-exists-error":"This business name is taken"
+      },
+      "check-email": {
+        "email-label":"Email",
+        "email-required-error":"Email is required",
+        "email-exists-error":"This email is taken",
+        "email-format-error": "Email is not correctly formatted"
+      }
+    },
+    "business-profile": {
+      "insert-address": {
+        "title": "Update Business Address"
+      }
+    },
+    "create-application": {
+      "demographics-title": "Applicant Information",
+      "system-title": "Application Settings",
+      "fields-title": "Fields",
+      "name-label": "Application Name",
+      "name-error": "Application name is required",
+      "field-name-label": "Field Name",
+      "field-name-error": "Field name is required",
+      "field-type-label": "Field Type",
+      "field-type-error": "Field type is required",
+      "field-value-label": "Allowed Value",
+      "fields": {
+        "name-header": "Field Name",
+        "type-header": "Field Type",
+        "values-header": "Allowed Values"
+      },
+      "history-title": "Address and Employment History",
+      "work-history-lookback-label": "Work history requirement in days",
+      "work-history-lookback-error": "Work history lookback is required",
+      "lookback-numeric-error": "Please enter a number for the days required on the application",
+      "employment-history-lookback-label": "Employment history requirement in days",
+      "employment-history-allow-gaps-label": "Allow gaps in employment history?",
+      "employment-history-disclaimer": "Employment history disclaimer",
+      
+      "address-history-lookback-label": "Address history requirement in days",
+      "address-history-lookback-error": "Address history lookback is required",
+      "work-history-allow-gaps-label": "Allow gaps in work history?",
+      "address-history-allow-gaps-label": "Allow gaps in address history?",
+      "education-history-include-label": "Collect education history?",
+      "driving-history-title": "Driving History",
+      "driving-history-include-label": "Driving requirements?",
+      "license-history-lookback-label": "License history in days",
+      "equipment-experience-include-label": "Include equipment experience?",
+      "equipment-type-label": "Equipment type",
+      "description-label": "Description",
+      "demographics-disclaimer-label": "Applicant Information Disclaimer",
+      "address-history-disclaimer-label": "Address History Disclaimer",
+      "work-history-disclaimer-label": "Work History Disclaimer",
+      "employment-history-disclaimer-label": "Employment History Disclaimer",
+      "license-history-disclaimer-label": "License History Disclaimer",
+      "accident-history-include-label": "Include violation/accident history?",
+      "accident-history-disclaimer-label": "Violations and Accidents History Disclaimer",
+      "accident-history-lookback-label": "Violations and Accidents history requirement in days",
+      "final-title": "Application Disclaimer",
+      "application-disclaimer-label": "Application Disclaimer",
+      "review-title": "Review your application"
+
+
+    }
+  }
+}

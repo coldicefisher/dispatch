@@ -1,0 +1,79 @@
+<div class="row" *ngIf="isHomeLoading$ | async">
+  <mat-card class="w-100 align-center">
+    <mat-card-content class="w-100">
+      <div class="col col-12 w-100">
+        <div class="inline-block w-100">
+          <i>Loading...&nbsp;&nbsp;&nbsp;&nbsp;</i>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="container container-business" *ngIf="business$ | async; let business">
+
+  <div class="banner row">
+    
+    <div class="banner-image round-corners" [style.background]="'url(' + business.activeProfileImage + ') no-repeat'">
+    </div>
+    <!--<div class="fade"></div>-->
+  </div>
+  
+  <div class="row">
+    <h2 class="">{{ business.name }}</h2>
+  </div>
+  
+  <div class="row" >
+    
+    <div class="col col-9">
+      <h2>About</h2>
+      <p>{{ business.about }}</p>
+    </div>
+
+    <div class="col col-3">
+  
+      <mat-card>
+        <mat-card-title>
+          <h3>Physical Address</h3>
+        </mat-card-title>
+        <mat-card-content>
+          <div *ngFor="let address of business.physicalAddresses">
+            <span>{{ address.address1 }}</span><br>
+            <span *ngIf="(address.address2 && address.address != '')">{{ address.address2 }}<br></span>
+            <span>{{ address.city }} {{ address.state }} {{ address.zip }}</span>
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>
+          <h3>Mailing Address</h3>
+        </mat-card-title>
+        <mat-card-content>
+          <div *ngFor="let address of business.mailingAddresses">
+            <span>{{ address.address1 }}</span><br>
+            <span *ngIf="(address.address2 && address.address != '')">{{ address.address2 }}<br></span>
+            <span>{{ address.city }} {{ address.state }} {{ address.zip }}</span>
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>
+          <h3>FMCSA Details</h3>
+        </mat-card-title>
+          
+        <mat-card-content>
+          
+          <span><strong>MC Number:</strong> {{ business.mcNumber}}</span><br>
+          <span><strong>DOT Number:</strong> {{ business.dotNumber }}</span><br>
+
+        </mat-card-content>
+      </mat-card>
+
+
+    </div>
+  </div>
+</div>

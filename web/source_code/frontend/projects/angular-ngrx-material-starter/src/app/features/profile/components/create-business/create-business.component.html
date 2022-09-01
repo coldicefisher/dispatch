@@ -1,0 +1,29 @@
+<div class="container">
+
+  <div class="row" [ngSwitch]="(pageStatus$ | async)">
+    
+    <div *ngSwitchCase="1">
+      <bizniz-create-business-1></bizniz-create-business-1>
+    </div>
+  
+    <div *ngSwitchCase="2">
+      <bizniz-create-business-2></bizniz-create-business-2>
+    </div>
+    <div *ngSwitchCase="3">
+      <bizniz-create-business-3></bizniz-create-business-3>
+    </div>
+    
+    <div *ngSwitchCase="4">
+      <bizniz-create-business-4></bizniz-create-business-4>
+    </div>
+    <div *ngSwitchCase="5">
+      <bizniz-create-business-5></bizniz-create-business-5>
+    </div>
+    
+    <div *ngSwitchDefault> 
+      <bizniz-create-business-1></bizniz-create-business-1>
+    </div>
+  </div>
+    
+</div>
+    

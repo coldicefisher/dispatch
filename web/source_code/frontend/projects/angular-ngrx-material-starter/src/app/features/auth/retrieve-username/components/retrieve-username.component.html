@@ -1,0 +1,36 @@
+
+
+
+<form [formGroup]="form" (ngSubmit)="onSendOtp()">
+  <mat-card>
+    <mat-card-title>{{ 'custom.auth.retrieve-username.title' | translate }}</mat-card-title>
+    
+      <div class="row">
+        <mat-form-field class="col">
+          <input matInput placeholder="{{ 'custom.auth.retrieve-username.address-label' | translate }}"
+            formControlName="address">
+            
+        </mat-form-field>
+      </div>
+
+      <label class="row form-element" [ngClass]="form.get('address').hasError('required') || form.get('address').hasError('validAddress')  ? 'text-danger' : 'text-success'">
+        <i class="material-icons">{{ form.get('address').hasError('required') ||
+          form.get('address').hasError('validAddress') ? 'cancel' :
+          'check_circle' }}</i>
+        {{ 'custom.auth.error-address' | translate }}
+      </label>
+  
+      
+      <div class="row justify-content-end">
+        <div class="col">
+          <button mat-raised-button color="primary" class="btn-wide" 
+            [disabled]="form.invalid" type="submit">
+            {{ 'custom.auth.otp-send-button' | translate }}
+          </button>
+        </div>
+      </div>
+    
+  </mat-card>
+
+</form>
+  

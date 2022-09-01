@@ -1,0 +1,43 @@
+<form [formGroup]="form">
+    
+  <div class="row" >
+    <div class="col">
+      <mat-form-field class="modal-control" >
+        <input matInput class="modal-control" placeholder="{{ 'custom.smart-controls.check-username.username-label' | translate }}"
+                formControlName="usernameCtrl" 
+                (blur)="checkUsername()"
+                cdkFocusInitial>
+        <mat-error *ngIf="form.get('usernameCtrl')?.hasError('required')">
+          {{ 'custom.smart-controls.check-username.username-required-error' | translate }}
+        </mat-error>
+        <mat-error *ngIf="form.get('usernameCtrl')?.hasError('validUsername')">
+          {{ 'custom.smart-controls.check-username.username-format-error' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ng-container *ngIf="usernameValid$ | async; then invalidUsername">
+      </ng-container>
+      <ng-template #invalidUsername>
+        <label class="form-element text-danger">
+          <i class="material-icons">{{ (usernameValid$ | async)  ? 'cancel' :
+            'check_circle' }}</i>
+            {{ 'custom.smart-controls.check-username.username-exists-error' | translate }}
+        </label>
+      </ng-template>
+    </div>
+  </div>
+</form>
+
+
+<!--
+USAGE:
+    <CheckUsername
+        (setUsername)="getUsername($event)" 
+    ></CheckUsername>
+
+    $event returns { exists: boolean, username: string, wrongFormat: boolean, empty: boolean }
+-->

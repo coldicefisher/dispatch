@@ -1,0 +1,52 @@
+
+    <form [formGroup]="form" (ngSubmit)="onCheck()">
+        <mat-card>
+          <mat-card-title>{{ 'custom.auth.retrieve-username-questions-verify.title' | translate }}</mat-card-title>
+          
+          <div class="row">
+            <label class="form-check-label">
+              {{ q1 }}
+            </label>
+          </div>
+          
+          <div class="row">
+            <mat-form-field class="col">
+              <input matInput placeholder="{{ 'custom.auth.retrieve-username-questions-verify.a-label' | translate }}"
+                formControlName="a1">
+              <mat-error *ngIf="form.get('a1')?.hasError('required')">
+                {{ 'custom.auth.retrieve-username-questions-verify.error1' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <label class="form-check-label">
+              {{ q2 }}
+            </label>
+          </div>
+
+          <div class="row">
+            <mat-form-field class="col">
+              <input matInput placeholder="{{ 'custom.auth.retrieve-username-questions-verify.a-label' | translate }}"
+                formControlName="a2">
+              <mat-error *ngIf="form.get('a2')?.hasError('required')">
+                {{ 'custom.auth.retrieve-username-questions-verify.error1' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+
+          <div class="row justify-content-end">
+            <div class="col">
+              <button mat-raised-button color="primary" class="btn-normal" [disabled]="form.invalid">
+                {{ 'custom.submit' | translate }}
+              </button>
+            </div>
+          </div>
+  
+          <hr />
+          
+      
+        </mat-card>
+     
+      </form>
