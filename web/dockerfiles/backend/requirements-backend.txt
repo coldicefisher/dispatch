@@ -1,3 +1,4 @@
+setuptools
 setuptools-rust>=0.12.1
 #rust>=1.41.0
 cryptography>=35.0.0
