@@ -36,6 +36,6 @@
 
 # cd /var/www/frontend/app
 
-# ng serve --host "0.0.0.0" --port "4200" --disable-host-check
+ng serve --host "0.0.0.0" --port "4200" --disable-host-check
 
-tail -f /dev/null
+# tail -f /dev/null

@@ -36,6 +36,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/architect": "^0.1402.6",
     "@angular-extensions/elements": "~12.6.0",
     "@angular-extensions/model": "^10.0.1",
     "@angular/animations": "~12.2.6",
