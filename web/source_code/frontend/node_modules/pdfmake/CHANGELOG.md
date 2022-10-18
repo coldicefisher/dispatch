@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.6 - 2022-10-09
+
+- Updated Roboto font (version 3.005)
+- Fixed calculating auto page height
+- Fixed TrueType Collection loading from URL
+- Fixed refetching fonts from URL
+
 ## 0.2.5 - 2022-04-01
 
 - Support passing headers to request for loading font files and images via URL adresses

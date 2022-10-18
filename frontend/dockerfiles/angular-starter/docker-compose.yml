@@ -1,0 +1,21 @@
+version: '3.8'
+
+networks:
+  default:
+    external:
+      name: main-network
+
+services:
+  # Client  ///////////////////////////////////////////////////////////////////////////
+  dispatch-client:
+    build:
+      context: .
+    container_name: dispatch-frontend
+    image: dispatch-frontend
+    ports:
+      - 4200:4200
+
+      
+    restart: always
+
+  # End Client  ////////////////////////////////////////////////////////////////////////

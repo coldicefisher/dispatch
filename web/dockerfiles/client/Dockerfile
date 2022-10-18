@@ -1,5 +1,7 @@
 # base image
-FROM node:16.13.0
+
+# FROM node:16.13.0
+FROM node:14.20.1
 ARG PROJECT=frontend
 ENV PROJECT_DIR=/var/www/${PROJECT}
 RUN mkdir -p ${PROJECT_DIR}
@@ -109,19 +111,21 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 # 	npm install webpack-dev-server
 	# npm install @angular-extensions/model@latest --legacy-peer-deps --force
 
-RUN npm install -g @angular/cli
+WORKDIR /var/www/frontend/projects/angular-ngrx-material-starter
+RUN npm install -g @angular/cli@12.2.18
+RUN npm install -g @angular/cli@13.3.9
 
 
-RUN npm i -g har-validator && \
-    npm i -g uuid && \
-    npm i -g ngx-device-detector --save && \
-    npm install n && \
-    npm i && \
-    npm install immer && \
-    npm install ngx-uploadcare-widget && \
-    npm install pdfmake && \
-    npm install jspdf && \
-    npm install html-to-pdfmake
+# RUN npm i -g har-validator && \
+#     npm i -g uuid && \
+#     npm i -g ngx-device-detector --save && \
+#     npm install n && \
+#     npm i && \
+#     npm install immer && \
+#     npm install ngx-uploadcare-widget && \
+#     npm install pdfmake && \
+#     npm install jspdf && \
+#     npm install html-to-pdfmake
 
 # RUN npm audit fix
 
