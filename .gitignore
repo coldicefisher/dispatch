@@ -155,5 +155,5 @@ cython_debug/
 *.gz
 *.xz
 *.xz
-data/
+databases/
 Archives/
