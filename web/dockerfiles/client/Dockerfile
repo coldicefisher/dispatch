@@ -114,6 +114,9 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 WORKDIR /var/www/frontend/projects/angular-ngrx-material-starter
 RUN npm install -g @angular/cli@12.2.18
 
+RUN npm install
+#RUN npm run build --prod
+# RUN ng build --prod
 
 # RUN npm i -g har-validator && \
 #     npm i -g uuid && \

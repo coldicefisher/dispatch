@@ -155,7 +155,16 @@ services:
     #   - dispatch-network  
     env_file:
       - ./.env
-      
+
+    deploy:
+      resources:
+        limits:
+          cpus: "3.0"
+          memory: 4096M
+        reservations:
+          cpus: "1.50"
+          memory: 1024M  
+
     restart: always
 
   # End Client  ////////////////////////////////////////////////////////////////////////

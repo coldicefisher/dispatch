@@ -35,7 +35,10 @@
 # npm audit fix
 
 # cd /var/www/frontend/app
+export NODE_OPTIONS=--max_old_space_size=4096
 
 ng serve --host "0.0.0.0" --port "4200" --disable-host-check
+# node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve
+
 
 # tail -f /dev/null
