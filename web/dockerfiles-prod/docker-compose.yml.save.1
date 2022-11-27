@@ -84,8 +84,8 @@ services:
       # - ./../source_code/static:/var/www/myproject/static
       # - ./../source_code/auth-backend/static:/var/www/backend/static
     dns:
-      - 8.8.8.8
-      - 1.1.1.1
+    # - 8.8.8.8
+    # - 1.1.1.1
     restart: always
     networks:
       - main-network  
@@ -122,8 +122,8 @@ services:
       # - ./../source_code/static:/var/www/myproject/static
       # - ./../source_code/auth-backend/static:/var/www/backend/static
     dns:
-      - 8.8.8.8
-      - 1.1.1.1
+    - 8.8.8.8
+    - 1.1.1.1
     restart: always
     networks:
       - main-network  

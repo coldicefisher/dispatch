@@ -1,8 +1,8 @@
 version: '3.8'
 
 networks:
-  main-network:
-    external: true
+  dispatch-network:
+      driver: bridge
 
 services:
 
@@ -12,9 +12,34 @@ services:
     image: redis:6.0.6-alpine
     restart: always
     networks:
-      - main-network
+      - dispatch-network
 
   # End Redis //////////////////////////////////////////////////////////////////////////
+
+
+  # Cassandra /////////////////////////////////////////////////////////////////////////
+  dispatch-cassandra:
+    build:
+      context: ./cassandra
+      dockerfile: Dockerfile
+    container_name: dispatch-cassandra
+    ports:
+      - "9160:9160"
+      - "9042:9042"
+    env_file: ./.env
+
+    volumes: 
+      - ./../source_code/databases/cassandra_data:/var/lib/cassandra
+    
+      
+    
+    networks:
+      - dispatch-network
+    
+    restart: always    
+  # End Cassandra /////////////////////////////////////////////////////////////////////
+
+  # End Redis  ////////////////////////////////////////////////////////////////////////
 
   # auth backend  //////////////////////////////////////////////////////////////////////
 
@@ -49,8 +74,8 @@ services:
     - 8.8.8.8
     - 1.1.1.1
     restart: always
-    networks:
-      - main-network  
+    # networks:
+    #   - dispatch-network  
 
   # End auth backend  //////////////////////////////////////////////////////////////////
 
@@ -84,11 +109,11 @@ services:
       # - ./../source_code/static:/var/www/myproject/static
       # - ./../source_code/auth-backend/static:/var/www/backend/static
     dns:
-      - 8.8.8.8
-      - 1.1.1.1
+    - 8.8.8.8
+    - 1.1.1.1
     restart: always
-    networks:
-      - main-network  
+    # networks:
+    #   - dispatch-network  
 
   # End backend  ///////////////////////////////////////////////////////////////////////
 
@@ -122,55 +147,28 @@ services:
       # - ./../source_code/static:/var/www/myproject/static
       # - ./../source_code/auth-backend/static:/var/www/backend/static
     dns:
-      - 8.8.8.8
-      - 1.1.1.1
+    - 8.8.8.8
+    - 1.1.1.1
     restart: always
-    networks:
-      - main-network  
+    # networks:
+    #   - dispatch-network  
 
   # End business backend  //////////////////////////////////////////////////////////////
 
+    
 
   # Client  ///////////////////////////////////////////////////////////////////////////
+
   # End Client  ////////////////////////////////////////////////////////////////////////
 
   # Reverse Proxy //////////////////////////////////////////////////////////////////////
-
-  # Cassandra /////////////////////////////////////////////////////////////////////////
-  dispatch-cassandra:
-    build:
-      context: ./cassandra
-      dockerfile: Dockerfile
-    container_name: dispatch-cassandra
-    ports:
-      - "9160:9160"
-      - "9042:9042"
-    env_file: ./.env
-
-    volumes: 
-      - ./../source_code/databases/cassandra_data:/var/lib/cassandra
-      # - ./cassandra.yaml:/etc/cassandra/cassandra.yaml
-      
-    
-    networks:
-      - main-network
-    
-    restart: always    
-  # End Cassandra /////////////////////////////////////////////////////////////////////
-
-volumes:
+  
+# volumes:
 #   media:
     
-  dispatch-static:
+#  dispatch-static:
     
-    driver_opts:
-      type: none
-      o: bind
-      device: ./../source_code/backend/static
-
-
-  # Postgres ///////////////////////////////////////////////////////////////////////////
-  # End Postgres //////////////////////////////////////////////////////////////////////
-
-
-  # End Redis  ////////////////////////////////////////////////////////////////////////
+#    driver_opts:
+#      type: none
+#      o: bind
+#      device: ./../source_code/backend/static

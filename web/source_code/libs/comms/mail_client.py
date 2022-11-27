@@ -16,16 +16,16 @@ class MailClient:
     '''
     @staticmethod
     def sendmail(subject: str, body_plain: str, sender: str, recipients: list, pwd: str, body_html: str = None):
-        def _send():
-            server = smtplib.SMTP('mail.bizniz.io')
-            server.connect('mail.bizniz.io', 587)
+#        def _send():
+            server = smtplib.SMTP('')
+            server.connect('smtp-relay.sendinblue.com', 587)
             server.ehlo(sender)
-            server.starttls()
-            server.login(sender, pwd)
+#             server.starttls()
+            server.login('coldicefisher@gmail.com', 'Qqzymp6f5NASYw4H')
             
             message = MIMEMultipart('alternative')
             message['Subject'] = subject
-            message['From'] = sender
+            message['From'] = 'admin@bizniz.io'
             # message['To'] = recipients
             message['To'] = ', '.join(recipients)
             part1 = MIMEText(body_plain, 'plain')
@@ -43,6 +43,6 @@ class MailClient:
             # message = f'From: {sender}\r\nTo: {recipients}\r\n\r\nSubject: {subject}\r\n\r\n{body}'
             # server.sendmail(sender, recipients, message)
 
-        t = Thread(target=_send, args=(), daemon=False)
-        t.start()
+#        t = Thread(target=_send, args=(), daemon=False)
+#        t.start()
     

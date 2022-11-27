@@ -1,0 +1,111 @@
+version: '3.8'
+
+networks:
+  dispatch-network:
+      driver: bridge
+
+services:
+
+  # Redis //////////////////////////////////////////////////////////////////////////////
+  dispatch-redis:
+    container_name: dispatch-redis
+    image: redis:6.0.6-alpine
+    restart: always
+    networks:
+      - dispatch-network
+
+  # End Redis //////////////////////////////////////////////////////////////////////////
+
+
+  # Cassandra /////////////////////////////////////////////////////////////////////////
+  dispatch-cassandra:
+    build:
+      context: ./cassandra
+      dockerfile: Dockerfile
+    container_name: dispatch-cassandra
+    ports:
+      - "9160:9160"
+      - "9042:9042"
+    env_file: ./.env
+
+    volumes: 
+      - ./../source_code/databases/cassandra_data:/var/lib/cassandra
+      
+    
+    networks:
+      - dispatch-network
+    
+    restart: always    
+  # End Cassandra /////////////////////////////////////////////////////////////////////
+
+  # End Redis  ////////////////////////////////////////////////////////////////////////
+
+  # backend  //////////////////////////////////////////////////////////////////////////
+  dispatch-backend:
+    build:
+        context: ./backend
+        dockerfile: Dockerfile-microservice
+    command: /sbin/entrypoint-microservice.sh
+    container_name: dispatch-backend 
+    image: dispatch-backend
+
+    depends_on:
+      - dispatch-redis
+    #  - dispatch-postgres
+
+    env_file:
+      - ./.env
+
+    ports:
+    - 8001:8000 # Docker
+
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./../source_code/backend:/var/www/backend
+      - ./../source_code/backend/media:/var/www/backend/media
+      # - ./../source_code/static:/var/www/myproject/static
+      - ./../source_code/backend/static:/var/www/backend/static
+    dns:
+    - 8.8.8.8
+    - 1.1.1.1
+    restart: always
+    networks:
+      - dispatch-network  
+
+  # End backend  ////////////////////////////////////////////////////////////////////////
+    
+
+  # Client  ///////////////////////////////////////////////////////////////////////////
+
+  # End Client  ////////////////////////////////////////////////////////////////////////
+
+  # Reverse Proxy //////////////////////////////////////////////////////////////////////
+  nginx-revproxy:
+    build:
+      context: ./proxy
+    container_name: dispatch-nginx-revproxy
+    image: dispatch-nginx-revproxy
+    depends_on:
+      - dispatch-backend
+      - dispatch-client
+    ports:
+      - 80:80
+    restart: always
+    volumes:
+      - ./../source_code/backend/media:/usr/src/app/media
+      - ./../source_code/backend/static:/usr/src/app/static
+      # - media:/usr/src/app/media
+      
+    networks:
+      - dispatch-network
+
+volumes:
+#   media:
+    
+  dispatch-static:
+    
+    driver_opts:
+      type: none
+      o: bind
+      device: ./../source_code/backend/static
